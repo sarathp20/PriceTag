@@ -96,7 +96,7 @@ public class camPage extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // if this is the result of our camera permission request
+
         if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
             if (hasAllPermissions(grantResults)) {
                 openCamera();
@@ -114,11 +114,11 @@ public class camPage extends AppCompatActivity {
     }
     private void requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // whether permission can be requested or on not
+
             if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                 Toast.makeText(this, "Camera Permission Required", Toast.LENGTH_SHORT).show();
             }
-            // request the camera permission permission
+
             requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
         }
     }

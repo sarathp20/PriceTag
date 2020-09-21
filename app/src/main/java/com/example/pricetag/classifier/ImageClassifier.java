@@ -64,7 +64,7 @@ public class ImageClassifier {
 
         tensorClassifier = new Interpreter(classifierModel, null);
 
-        // Reads type and shape of input and output tensors, respectively. [START]
+
         int imageTensorIndex = 0; // input
         int probabilityTensorIndex = 0;// output
 
@@ -82,7 +82,7 @@ public class ImageClassifier {
 
         probabilityImageBuffer = TensorBuffer.createFixedSize(outputImageShape, outputDataType);
 
-        // Creates the post processor for the output probability.
+
         probabilityProcessor = new TensorProcessor.Builder().add(new NormalizeOp(PROBABILITY_MEAN, PROBABILITY_STD))
                 .build();
     }
