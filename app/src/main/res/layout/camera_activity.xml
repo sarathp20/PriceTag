@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/iv_capture"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:rotation="90"
+        android:layout_height="450dp"
+        android:rotation="0"
 
          />
     <TextView
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/detectedImage"
         android:textSize="25dp"
-        android:paddingBottom="30dp"
+
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textStyle="bold"

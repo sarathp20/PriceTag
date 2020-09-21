@@ -78,10 +78,10 @@ public class camPage extends AppCompatActivity {
             try {
                 imageClassifier = new ImageClassifier(this);
             } catch (IOException e) {
-                Log.e("error while creation of image classifier=", "ERROR: " + e);
+               System.out.println("error in object creation of classifier  "+e);
             }
             List<ImageClassifier.Recognition> predicitons = imageClassifier.recognizeImage(
-                    photo, 90);
+                    photo, 0);
             final List<String> predicitonsList = new ArrayList<>();
             for (ImageClassifier.Recognition recog : predicitons) {
                 predicitonsList.add(recog.getName());
@@ -124,7 +124,7 @@ public class camPage extends AppCompatActivity {
     }
     private void openCamera() {
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
-        cameraIntent.putExtra("crop", "true" );
+
         startActivityForResult(cameraIntent, CAMERA_REQEUST_CODE);
     }
     private boolean hasPermission() {
