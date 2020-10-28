@@ -90,14 +90,7 @@ public class Keyword_Search extends AppCompatActivity {
             price =(String) p_price.get(i);
 
             text.setText(text.getText()+name+" "+price+"\n\n\n");
-            /*imgurl =(String) p_image.get(i);
-            try {
-                InputStream is = (InputStream) new URL(imgurl).getContent();
-                Drawable d = Drawable.createFromStream(is, "src name");
-                }
-            catch (Exception e){
-                text.setText(text.getText()+"Couldnt load image\n");
-            }*/
+
         }
 
     }
@@ -110,7 +103,7 @@ public class Keyword_Search extends AppCompatActivity {
             prodiag.setMessage("loading");
             prodiag.setIndeterminate(false);
             prodiag.show();
-            //Toast.makeText(getApplicationContext(), "Best price you will get on Flipkart !!", Toast.LENGTH_LONG).show();
+
             super.onPreExecute();
 
         }
@@ -134,13 +127,7 @@ public class Keyword_Search extends AppCompatActivity {
                 document = Jsoup.connect(url).get();
                 Elements name = document.select("._3wU53n"); //get name
                 Elements price = document.select("._1vC4OE._2rQ-NK"); //Get price
-                //Elements images = document.select("_3BTv9X");
-                //Elements imageclass = document.select("_3BTv9X");
-                //Elements images = imageclass.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
                 Elements name1 = document.select("._2cLu-l"); //get name
-                //for (Element image : images) {
-                //text.setText(text.getText()+image.attr("src"));
-                //p_image.add((String)image.attr("src"));}
                 p_name.clear();
                 p_price.clear();
                 text.setText("");
@@ -148,7 +135,6 @@ public class Keyword_Search extends AppCompatActivity {
                 for (i = 0; i < price.size() && i < name.size(); i++) {
                     p_name.add(name.get(i).text());
                     p_price.add(price.get(i).text());
-                    // p_image.add(images.get(i).attr("src"));
                 }
                 for (i = 0; i < price1.size() && i < name1.size(); i++) {
                     p_name.add(name1.get(i).text());
