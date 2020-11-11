@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#E8EAF6">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,20 +26,42 @@
         android:layout_marginBottom="250dp"
 
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
     <Button
 
         android:id="@+id/startCamera"
         android:paddingTop="50dp"
+        android:layout_weight="1"
         android:paddingBottom="50dp"
         android:gravity="center"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="Find Your Product"
+        android:text="Image search"
         android:textAllCaps="true"
         android:textAlignment="gravity"
         android:textStyle="bold"
         android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_red_dark"
+        android:background="#5C6BC0"
+        android:layout_marginRight=".5dp"
         />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft=".5dp"
+            android:paddingTop="50dp"
+            android:paddingBottom="50dp"
+            android:gravity="center"
+            android:id="@+id/keySearch"
+            android:text="keyword search"
+            android:textAllCaps="true"
+            android:textAlignment="gravity"
+            android:textStyle="bold"
+            android:textColor="@android:color/background_light"
+            android:background="#5C6BC0"
+            />
+    </LinearLayout>
 
 </LinearLayout>

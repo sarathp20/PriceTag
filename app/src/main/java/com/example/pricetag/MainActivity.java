@@ -17,6 +17,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button camStart=findViewById(R.id.startCamera);
+        Button test=findViewById(R.id.keySearch);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent keySer=new Intent(MainActivity.this,Keyword_Search.class);
+                startActivity(keySer);
+            }
+        });
         camStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
