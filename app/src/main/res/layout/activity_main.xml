@@ -5,44 +5,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+
     android:orientation="vertical"
     android:background="#E8EAF6">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="PriceTag"
-        android:textSize="70dp"
-        android:gravity="center"
-        android:textStyle="bold"
         android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:text="PriceTag"
         android:textColor="@android:color/black"
-        />
+        android:textSize="70dp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Price what you see"
-        android:gravity="center"
-        android:textStyle="italic"
+        android:layout_height="49dp"
         android:layout_marginBottom="250dp"
+        android:gravity="center"
+        android:text="Price what you see"
+        android:textStyle="italic"
 
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
     <Button
 
         android:id="@+id/startCamera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_red_dark"
+        android:gravity="center"
         android:paddingTop="50dp"
         android:layout_weight="1"
         android:paddingBottom="50dp"
+        android:text="Find Your Product"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:text="Image search"
         android:textAllCaps="true"
         android:textAlignment="gravity"
-        android:textStyle="bold"
+        android:textAllCaps="true"
         android:textColor="@android:color/background_light"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/logoutbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:onClick="logout"/>
         android:background="#5C6BC0"
         android:layout_marginRight=".5dp"
         />
