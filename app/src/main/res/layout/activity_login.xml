@@ -26,7 +26,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="Login here"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.519" />
 
     <Button
-        android:id="@+id/regbtn"
+        android:id="@+id/logBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
@@ -81,7 +81,7 @@
         app:layout_constraintVertical_bias="0.82" />
 
     <TextView
-        android:id="@+id/cancel"
+        android:id="@+id/forget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Forget Password"
