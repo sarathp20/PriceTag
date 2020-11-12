@@ -36,10 +36,14 @@ public class Register extends AppCompatActivity {
 
         fAuth=FirebaseAuth.getInstance();
 
-        if(fAuth.getCurrentUser()!=null){
+       /* if(fAuth.getCurrentUser()!=null){
+            FirebaseAuth.getInstance().signOut();
+            Toast.makeText(Register.this,"Register Page issue ",Toast.LENGTH_SHORT).show();
+
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
-        }
+
+        }*/
 
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
