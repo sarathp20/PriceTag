@@ -140,11 +140,12 @@ public class camPage extends AppCompatActivity {
         String name;
         String price;
         String imgurl;
-
+        String detail = "";
         for (int i = 0; i < 3; i++) {
             name =(String) p_name.get(i);
             price =(String) p_price.get(i);
-            det.setText(name+" "+price);
+            detail=detail+(i+1)+") "+name+" "+"\n\tPrice : "+price+"\n";
+
 
             /*imgurl =(String) p_image.get(i);
             try {
@@ -155,7 +156,7 @@ public class camPage extends AppCompatActivity {
                 text.setText(text.getText()+"Couldnt load image\n");
             }*/
         }
-
+        det.setText(detail);
     }
     @SuppressLint("StaticFieldLeak")
     private class GetData extends AsyncTask<Void, Void, Void> {

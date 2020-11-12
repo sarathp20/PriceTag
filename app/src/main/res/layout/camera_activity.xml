@@ -28,8 +28,9 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="13dp"
         android:textStyle="bold"
+        android:textColor="@android:color/background_dark"
         android:id="@+id/details"/>
     <Button
 
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:text="Find Another Product"
         android:textAllCaps="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:textAlignment="gravity"
         android:textStyle="bold"
         android:textColor="@android:color/background_light"
