@@ -37,6 +37,7 @@ import java.util.Objects;
 
 public class camPage extends AppCompatActivity {
     String productName;
+    List<String>predicitonsList;
     Button retake;
     ProgressDialog prodiag;
     ArrayList<String> p_name = new ArrayList<>();
@@ -48,11 +49,15 @@ public class camPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity);
         initializeUIElements();
+        final TextView de=findViewById(R.id.details);
         retake=findViewById(R.id.startCamera2);
         retake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                de.setText("");
                 initializeUIElements();
+
+
             }
         });
 
@@ -92,7 +97,7 @@ public class camPage extends AppCompatActivity {
             }
             List<ImageClassifier.Recognition> predicitons = imageClassifier.recognizeImage(
                     photo, 0);
-            final List<String> predicitonsList = new ArrayList<>();
+             predicitonsList = new ArrayList<>();
             for (ImageClassifier.Recognition recog : predicitons) {
                 predicitonsList.add(recog.getName());
             }
@@ -126,10 +131,11 @@ public class camPage extends AppCompatActivity {
     }
 
     public void putData(){
+        TextView det=findViewById(R.id.details);
         String name;
         String price;
         String imgurl;
-        TextView det=findViewById(R.id.details);
+
         for (int i = 0; i < 3; i++) {
             name =(String) p_name.get(i);
             price =(String) p_price.get(i);

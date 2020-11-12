@@ -17,28 +17,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button camStart=findViewById(R.id.startCamera);
-        Button test=findViewById(R.id.keySearch);
-        test.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_start_page);
+        Button reg = findViewById(R.id.Reg);
+        Button log = findViewById(R.id.Log);
+        Button wlog = findViewById(R.id.wLog);
+        reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent keySer=new Intent(MainActivity.this,Keyword_Search.class);
-                startActivity(keySer);
+                Intent regOp = new Intent(MainActivity.this, Register.class);
+                startActivity(regOp);
             }
         });
-        camStart.setOnClickListener(new View.OnClickListener() {
+        log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent openCam=new Intent(MainActivity.this,camPage.class);
-                startActivity(openCam);
+                Intent logOp = new Intent(MainActivity.this, Login.class);
+                startActivity(logOp);
             }
         });
-    }
-
-    public void logout(View view){
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(),Login.class));
-        finish();
+        wlog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent logOp = new Intent(MainActivity.this, startPage.class);
+                startActivity(logOp);
+            }
+        });
     }
 }
