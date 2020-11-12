@@ -39,6 +39,7 @@ public class camPage extends AppCompatActivity {
     String productName;
     List<String>predicitonsList;
     Button retake;
+    int flag=0;
     ProgressDialog prodiag;
     ArrayList<String> p_name = new ArrayList<>();
     ArrayList<String> p_price = new ArrayList<>();
@@ -48,14 +49,18 @@ public class camPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity);
-        initializeUIElements();
+
+            initializeUIElements();
+
         final TextView de=findViewById(R.id.details);
         retake=findViewById(R.id.startCamera2);
         retake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 de.setText("");
-                initializeUIElements();
+                Intent intent=getIntent();
+                startActivity(intent);
+                flag=1;
 
 
             }
