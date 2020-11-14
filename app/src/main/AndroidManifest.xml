@@ -13,10 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-                <activity android:name=".HomePage"></activity>
+        <activity android:name=".HomePage"></activity>
         <activity android:name=".startPage" />
 
-        <activity android:name=".startPage"></activity>
 
         <activity android:name=".Register">
 <!--            <intent-filter>-->

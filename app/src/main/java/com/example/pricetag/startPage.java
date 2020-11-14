@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class startPage extends AppCompatActivity {
-
+    public static Button logbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,13 @@ public class startPage extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button camStart=findViewById(R.id.startCamera);
         Button test=findViewById(R.id.keySearch);
-        Button logbtn=findViewById(R.id.logoutbtn);
+        logbtn=(Button)findViewById(R.id.logoutbtn);
+        if(MainActivity.hidebtn==1){
+            logbtn.setVisibility(View.VISIBLE);
+        }
+        else if(MainActivity.hidebtn==0){
+            logbtn.setVisibility(View.GONE);
+        }
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
