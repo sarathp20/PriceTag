@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register">
-
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
@@ -130,5 +129,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.88" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
