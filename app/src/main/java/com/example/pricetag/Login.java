@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final EditText resetMail=new EditText(view.getContext());
-                final AlertDialog.Builder passwordResetDialog=new AlertDialog.Builder(view.getContext());
+                final AlertDialog.Builder passwordResetDialog=new AlertDialog.Builder(view.getContext(),R.style.todoDialogLight);
                 passwordResetDialog.setTitle("Reset Password?");
                 passwordResetDialog.setMessage("Enter Your Email To Recieve Password Link" );
                 passwordResetDialog.setView(resetMail);
@@ -70,7 +70,7 @@ public class Login extends AppCompatActivity {
                 });
 
 
-                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                passwordResetDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -106,7 +106,7 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), startPage.class));
+                            startActivity(new Intent(getApplicationContext(), HomePage.class));
                         } else {
                             Toast.makeText(Login.this, "Error!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
