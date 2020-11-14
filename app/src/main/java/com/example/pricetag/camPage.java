@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +25,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pricetag.classifier.ImageClassifier;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
+
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -84,16 +93,48 @@ public class camPage extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         ImageView imageView;
-
+        final TextView txtRec=findViewById(R.id.textRec);
         imageView = findViewById(R.id.iv_capture);
         TextView text = findViewById(R.id.detectedImage);
         if (requestCode == CAMERA_REQEUST_CODE) {
 
             Bitmap photo = (Bitmap) Objects.requireNonNull(Objects.requireNonNull(data).getExtras()).get("data");
-
+            Bitmap rotPh;
             imageView.setImageBitmap(photo);
+            Matrix matrix=new Matrix();
+            matrix.preRotate(90);
+            rotPh=Bitmap.createBitmap(photo,0,0,photo.getWidth(),photo.getHeight(),matrix,true);
 
 
+
+            FirebaseVisionImage firebaseVisionImage=FirebaseVisionImage.fromBitmap(rotPh);
+           // FirebaseVision firebaseVision=FirebaseVision.getInstance();
+            FirebaseVisionTextDetector firebaseVisionTextDetector=FirebaseVision.getInstance().getVisionTextDetector();
+            Task<FirebaseVisionText> task=firebaseVisionTextDetector.detectInImage(firebaseVisionImage);
+
+            task.addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                @Override
+                public void onSuccess(FirebaseVisionText firebaseVisionText) {
+                   List<FirebaseVisionText.Block>blockList=firebaseVisionText.getBlocks();
+                   if(blockList.size()==0){
+                       Toast.makeText(camPage.this, "No Text Detected", Toast.LENGTH_SHORT).show();
+                   }
+                   else{
+                       for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()){
+                           String s=block.getText();
+                           txtRec.setText(s);
+                       }
+                   }
+
+                }
+            });
+            task.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.d("Error: ",e.getMessage());
+                }
+            });
             ImageClassifier imageClassifier = null;
             try {
                 imageClassifier = new ImageClassifier(this);
@@ -109,6 +150,7 @@ public class camPage extends AppCompatActivity {
             productName=predicitonsList.get(0);
             text.setText(predicitonsList.get(0));
             showDetail();
+
 
 
 
