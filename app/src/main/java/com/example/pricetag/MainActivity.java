@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    public static int hidebtn;
 
 
     @Override
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hidebtn=1;
                 Intent regOp = new Intent(MainActivity.this, Register.class);
                 startActivity(regOp);
             }
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hidebtn=1;
                 Intent logOp = new Intent(MainActivity.this, Login.class);
                 startActivity(logOp);
             }
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         wlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hidebtn=0;
                 Intent logOp = new Intent(MainActivity.this, startPage.class);
                 startActivity(logOp);
             }
