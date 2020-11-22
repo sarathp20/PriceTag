@@ -8,6 +8,8 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -39,10 +42,10 @@ public class Keyword_Search extends AppCompatActivity {
     ProgressDialog prodiag;
     String productName;
     EditText item;
+    ArrayList<Bitmap> p_images = new ArrayList<>();
     ArrayList<String> p_name = new ArrayList<>();
     ArrayList<String> p_price = new ArrayList<>();
     ArrayList<String> p_rating = new ArrayList<>();
-    ArrayList<String> p_image = new ArrayList<>();
     ArrayList<String> p_link = new ArrayList<>();
     ArrayList<String> amaz_p_name = new ArrayList<>();
     ArrayList<String> amaz_p_price = new ArrayList<>();
@@ -102,11 +105,11 @@ public class Keyword_Search extends AppCompatActivity {
     }
     public void showDetail() {
         //  recyclerView.removeAllViewsInLayout();
+        p_images = new ArrayList<>();
         productName = String.valueOf(item.getText());
         p_name = new ArrayList<>();
         p_price = new ArrayList<>();
         p_rating = new ArrayList<>();
-        p_image = new ArrayList<>();
         p_link = new ArrayList<>();
         amaz_p_name = new ArrayList<>();
         amaz_p_price = new ArrayList<>();
@@ -122,22 +125,12 @@ public class Keyword_Search extends AppCompatActivity {
     }
     public void putData(){
         ArrayList<Product> list = new ArrayList<>();
-        //  for(int k=0;k<list.size();k++){
-        //      list.remove(k);
-        //   }
-        //   adapter=new MyAdapter(null);
-        //  recyclerView.setAdapter(adapter);
-        //   recyclerView.removeAllViewsInLayout();
-        String name;
-        String price;
-        String imgurl;
         int i=0,j=0;
-
         try {
             while (i < p_name.size() && j < snap_p_name.size()) {
                 String name1 = (String) p_name.get(i);
                 String price1 = (String) p_price.get(i);
-                //      String image1 = (String) p_image.get(i);
+                //  Bitmap image1 = p_images.get(i);
                 String rating1 = (String) p_rating.get(i);
                 String link1 = (String) p_link.get(i);
                 price1=price1.substring(1);
@@ -148,9 +141,10 @@ public class Keyword_Search extends AppCompatActivity {
                 }
                 String name2 = (String) snap_p_name.get(j);
                 String price2 = (String) snap_p_price.get(j);
-                //  String image2 = (String) snap_p_image.get(i);
+                //  String image2 = (String) snap_p_image.get(j);
                 String rating2 = (String) snap_p_rating.get(j);
-                String link2 = (String) snap_p_link.get(i);
+                String link2 = (String) snap_p_link.get(j);
+
                 price2=price2.substring(4);
                 pricesplit=price2.split(",");
                 price2="";
@@ -158,55 +152,67 @@ public class Keyword_Search extends AppCompatActivity {
                     price2=price2+a;
                 }
                 if(Float.parseFloat(price1) < Float.parseFloat(price2)) {
-                    list.add(new Product(name1,Float.parseFloat(rating1),Float.parseFloat(price1),/*image1,*/"Flipkart",link1));
+                    list.add(new Product(name1,Float.parseFloat(rating1),Float.parseFloat(price1),"Flipkart",link1));
                     i++;
                 }
                 else {
-                    list.add(new Product(name2,Float.parseFloat(rating2),Float.parseFloat(price2),/*image2,*/"Snapdeal",link2));
-                    j++;
-                }
-            }
-            if(i < p_name.size()) {
-                while (i < p_name.size()) {
-                    String name1 = (String) p_name.get(i);
-                    String price1 = (String) p_price.get(i);
-                    price1=price1.substring(1);
-                    String link1 = (String) p_link.get(i);
-                    String pricesplit[]=price1.split(",");
-                    price1="";
-                    for(String a:pricesplit){
-                        price1=price1+a;
-                    }
-                    // String image1 = (String) p_image.get(i);
-                    String rating1 = (String) p_rating.get(i);
-                    //    String link1 = (String) p_link.get(i);
-                    list.add(new Product(name1,Float.parseFloat(rating1),Float.parseFloat(price1),/*image1,*/"Flipkart",link1));
-                    i++;
-                }
-            }
-            if(j < snap_p_name.size()) {
-                while (j < snap_p_name.size()) {
-                    String name2 = (String) snap_p_name.get(j);
-                    String price2 = (String) snap_p_price.get(j);
-                    price2=price2.substring(4);
-                    String link2 = (String) snap_p_link.get(i);
-                    String[] pricesplit=price2.split(",");
-                    price2="";
-                    for(String a:pricesplit){
-                        price2=price2+a;
-                    }
-                    //      String image2 = (String) snap_p_image.get(i);
-                    //    String link2 = (String) snap_p_link.get(j);
-                    String rating2 = (String) snap_p_rating.get(j);
+
                     list.add(new Product(name2,Float.parseFloat(rating2),Float.parseFloat(price2),/*image2,*/"Snapdeal",link2));
                     j++;
                 }
             }
         }
         catch (Exception e){}
+        try {
+            if (i < p_name.size()) {
+                while (i < p_name.size()) {
+                    String name1 = (String) p_name.get(i);
+                    String price1 = (String) p_price.get(i);
+                    //  Bitmap image1 = p_images.get(i);
+                    String rating1 = (String) p_rating.get(i);
+                    String link1 = (String) p_link.get(i);
+                    price1 = price1.substring(1);
+                    String pricesplit[] = price1.split(",");
+                    price1 = "";
+                    for (String a : pricesplit) {
+                        price1 = price1 + a;
+                    }
+                    //   Bitmap image1 = p_images.get(i);
+                    //    String link1 = (String) p_link.get(i);
+                    list.add(new Product(name1, Float.parseFloat(rating1), Float.parseFloat(price1), "Flipkart", link1));
+                    i++;
+
+                }
+            }
+        }
+        catch (Exception e){}
+        try {
+            if (j < snap_p_name.size()) {
+                while (j < snap_p_name.size()) {
+                    String name2 = (String) snap_p_name.get(j);
+                    String price2 = (String) snap_p_price.get(j);
+                    //  String image2 = (String) snap_p_image.get(i);
+                    String rating2 = (String) snap_p_rating.get(j);
+                    String link2 = (String) snap_p_link.get(j);
+                    price2 = price2.substring(4);
+                    String pricesplit[] = price2.split(",");
+                    price2 = "";
+                    for (String a : pricesplit) {
+                        price2 = price2 + a;
+                    }
+                    //      String image2 = (String) snap_p_image.get(i);
+                    //    String link2 = (String) snap_p_link.get(j);
+
+                    list.add(new Product(name2, Float.parseFloat(rating2), Float.parseFloat(price2),/*image2,*/"Snapdeal", link2));
+                    j++;
+                }
+            }
+        }
+        catch (Exception e){}
+
         Product[] listitems=new Product[list.size()];
         for(i=0;i<list.size();i++){
-            listitems[i]=new Product(list.get(i).getTitle(),list.get(i).getRating(),list.get(i).getPrice(),/*list.get(i).getImage(),*/list.get(i).getsite(),list.get(i).getlink());
+            listitems[i]=new Product(list.get(i).getTitle(),list.get(i).getRating(),list.get(i).getPrice(),/*null,*/list.get(i).getsite(),list.get(i).getlink());
         }
         recyclerView.setAdapter(new MyAdapter(listitems));
        /* for (int i = 0; i < p_price.size() && i < p_name.size(); i++) {
@@ -295,7 +301,8 @@ public class Keyword_Search extends AppCompatActivity {
                     Elements rating = all.get(i).select("._3LWZlK");
                     //      String images = all.get(i).select("._1Nyybr ._30XEf0").attr("src");
                     Elements link = all.get(i).select("._1fQZEK");
-                    p_link.add("https://www.flipkart.com"+link.attr("href"));
+                    String linksend = "https://www.flipkart.com"+link.attr("href");
+                    p_link.add(linksend);
                     p_name.add(name.text());
                     p_price.add(price.text());
                     if(rating.text().equals("")){
@@ -305,7 +312,22 @@ public class Keyword_Search extends AppCompatActivity {
                         p_rating.add(rating.text());
                     }
                     //    p_image.add(images);
-
+          /*          try{
+                        Document document12 =Jsoup.connect(linksend).get();
+                        Element images = document12.select(".q6DClP").first();
+                        //for(int k=0;k<images.size();k++){
+                         //   String img = images.get(i).attr("style").substring(21);
+                        String img = images.attr("style").substring(21);
+                            img = img.substring(0,img.length()-1);
+                            Log.d("my",img);
+                            if(!img.startsWith("\\")){
+                                Bitmap bmp = BitmapFactory.decodeStream(new java.net.URL(img).openStream());
+                                p_images.add(bmp);
+                                break;
+                            }
+                      //  }
+                    }
+                    catch (Exception e){} */
                 }
 
 
@@ -324,7 +346,8 @@ public class Keyword_Search extends AppCompatActivity {
                     Elements price1 = all.get(i).select("._30jeq3"); //Get price
                     Elements rating1 = all.get(i).select("._3LWZlK");
                     Elements link1 = all.get(i).select("._2rpwqI");
-                    p_link.add("https://www.flipkart.com"+link1.attr("href"));
+                    String linksend = "https://www.flipkart.com"+link1.attr("href");
+                    p_link.add(linksend);
                     // Elements images1 = document.getElementsByClass("_1Nyybr _30XEf0");
                     //  Elements link1=document.select("._2cLu-l");
                     p_name.add(name1.text());
@@ -335,6 +358,23 @@ public class Keyword_Search extends AppCompatActivity {
                     else {
                         p_rating.add(rating1.text());
                     }
+                /*    try{
+                        Document document12 =Jsoup.connect(linksend).get();
+                        Elements images = document12.select(".q6DClP");
+                        for(int k=0;k<images.size();k++){
+                            String img = images.get(i).attr("style").substring(21);
+                            img = img.substring(0,img.length()-1);
+                            if(img.startsWith("\\")){
+                                Log.d("my",img);
+                            }
+                            else{
+                                Bitmap bmp = BitmapFactory.decodeStream(new java.net.URL(img).openStream());
+                                p_images.add(bmp);
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception e){} */
 
                 }
 
@@ -374,11 +414,11 @@ public class Keyword_Search extends AppCompatActivity {
                 //    Elements imagesnap = document3.select(".product-image ");
 
                 //  Elements ratingsnap = document3.select(".filled-stars");
-
                 for(int j=0;j<all.size();j++) {
                     Elements namesnap = all.get(j).select(".product-title");
                     Elements pricesnap = all.get(j).select(".lfloat .product-price");
-                    Elements linksnap = all.get(j).select(".dp-widget-link.noUdLine");
+                    Elements linkstup = all.get(j).select(".product-tuple-image");
+                    Elements linksnap = linkstup.select("a");
                     Elements ratingsnap = all.get(j).select(".filled-stars");
                     snap_p_name.add(namesnap.text());
                     snap_p_price.add(pricesnap.text());
@@ -422,7 +462,8 @@ public class Keyword_Search extends AppCompatActivity {
                     //      Elements rating = all.get(i).select("._3eWWd-");
                     //      String images = all.get(i).select("._1Nyybr ._30XEf0").attr("src");
                     Elements link = all.get(i).select("._2UzuFa");
-                    p_link.add("https://www.flipkart.com"+link.attr("href"));
+                    String linksend = "https://www.flipkart.com"+link.attr("href");
+                    p_link.add(linksend);
                     p_rating.add(("0"));
                     p_name.add(name.text());
                     p_price.add(price.text());
@@ -435,6 +476,21 @@ public class Keyword_Search extends AppCompatActivity {
                     //    p_image.add(images);
 
                     //      Log.d("my",p_image.get(i));
+             /*       try{
+                        Document document12 =Jsoup.connect(linksend).get();
+                        Elements images = document12.select(".q6DClP");
+                        for(int k=0;k<images.size();k++){
+                            String img = images.get(i).attr("style").substring(21);
+                            img = img.substring(0,img.length()-1);
+                            Log.d("my",img);
+                            if(!img.startsWith("\\")){
+                                Bitmap bmp = BitmapFactory.decodeStream(new java.net.URL(img).openStream());
+                                p_images.add(bmp);
+                                break;
+                            }
+                        }
+                    }
+                    catch (Exception e){} */
                 }
 
             }

@@ -1,120 +1,102 @@
 package com.example.pricetag;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.TextView;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class ItemDisplay extends AppCompatActivity {
-    Button buynow;
-    ProgressDialog prodiag;
-    String url;
-    String site;
+import com.google.android.gms.vision.L;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
+import java.util.Locale;
+
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyAdapterViewHolder>{
+
+
+    public static final String EXTRA_MESSAGE="MainActivityLabel";
+    Product[] product;
+    ViewGroup parent;
+    public MyAdapter(Product[] product){
+        this.product=product;
+    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_display);
-        Intent intent = getIntent();
-        url = intent.getStringExtra("url");
-        site = intent.getStringExtra("site");
-        Log.d("my",url);
-        Log.d("my",site);
-        buynow = findViewById(R.id.buynow);
-        buynow.setOnClickListener(new View.OnClickListener() {
+    public MyAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        this.parent = parent;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view=inflater.inflate(R.layout.product_list,parent,false);
+        return new MyAdapterViewHolder(view);
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull MyAdapterViewHolder holder, int position) {
+        Product p = product[position];
+        holder.item.setText(p.getTitle());
+        holder.price.setText("₹"+Float.toString((p.getPrice())));
+        // holder.site.setText(p.getsite());
+        String site = p.getsite();
+        if (site.equals("Flipkart")) {
+            holder.logo.setImageResource(R.drawable.flipkartlogo);
+        } else if (site.equals("Snapdeal")) {
+            holder.logo.setImageResource(R.drawable.snapdeallogo);
+        }
+        holder.rating.setText(Float.toString(p.getRating()));
+        holder.itemid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ItemDisplay.this, ItemBuy.class);
-                intent.putExtra("url",url);
-                startActivity(intent);
+                Intent intent = new Intent(parent.getContext(),ItemDisplay.class);
+                intent.putExtra("url",p.getlink());
+                intent.putExtra("site",p.getsite());
+                parent.getContext().startActivity(intent);
             }
+
         });
-        ItemDisplay.GetData data = new ItemDisplay.GetData();
-        data.execute();
-    }
-    public void putData(){
+        //   holder.image.setImageBitmap(p.getImage());
 
     }
-    private class GetData extends AsyncTask<Void,Void,Void> {
-        @Override
-        protected void onPreExecute() {
-            prodiag = new ProgressDialog(ItemDisplay.this);
-            prodiag.setMessage("loading");
-            prodiag.setIndeterminate(false);
-            prodiag.show();
-            //Toast.makeText(getApplicationContext(), "Best price you will get on Flipkart !!", Toast.LENGTH_LONG).show();
-            super.onPreExecute();
 
-        }
 
-        @Override
-        protected Void doInBackground(Void... voids) {
 
-            Document document;
-            //   Document document2;
-            if(site.equals("Flipkart")) {
-                try {
-                    document = Jsoup.connect(url).get();
-                    Elements name = document.select(".B_NuCI");
-                    Elements price = document.select("._30jeq3._16Jk6d");
-                    Elements originalprice = document.select("._3I9_wc._2p6lqe");
-                    Elements off =document.select("._3Ay6Sb._31Dcoz");
-                    Elements offprice = off.select("span");
-                    Elements rating = document.select("._3LWZlK");
-                    Log.d("my",name.text());
-                    Log.d("my",price.text());
-                    Log.d("my",offprice.text());
-                    Log.d("my",originalprice.text());
-                    Log.d("my",rating.text().substring(0,3));
-                    Elements availoffers = document.select(".XUp0WS");
-                    Log.d("my","yes");
-                    Elements availableoffers = availoffers.select("._16eBzU.col");
-                    Log.d("my","yes1");
-                    for(int i=0;i<availableoffers.size();i++){
-                        Log.d("my","yes2");
-                        Elements offerdetails = availableoffers.get(i).getElementsByTag("span");
-                        for(int j=0;j<offerdetails.size();j++){
-                            Log.d("my",offerdetails.get(j).text());
-                        }
+    @Override
+    public int getItemCount() {
+        return product.length;
+    }
 
-                    }
-                    Elements images = document.select(".q6DClP");
-                    for(int i=0;i<images.size();i++){
-                        Log.d("my",images.get(i).attr("style"));
-                    }
 
-                } catch (Exception e) {
-                    Log.d("my", "Connection Error");
-                }
-
-            }
-            else if(site.equals("Snapdeal")){
-                try {
-                    document = Jsoup.connect(url).get();
-
-                } catch (Exception e) {
-                    Log.d("my", "Connection Error");
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            prodiag.dismiss();
-            super.onPostExecute(aVoid);
-            putData();
+    public class MyAdapterViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout itemid;
+        TextView item;
+        TextView price;
+        ImageView image;
+        ImageView logo;
+        TextView rating;
+        public MyAdapterViewHolder(View itemView){
+            super(itemView);
+            item = itemView.findViewById(R.id.textViewTitle);
+            price = itemView.findViewById(R.id.textViewPrice);
+            image = itemView.findViewById(R.id.imageView);
+            logo = itemView.findViewById(R.id.logo);
+            rating = itemView.findViewById(R.id.textViewRating);
+            itemid = itemView.findViewById(R.id.itemid);
         }
     }
+
 }
