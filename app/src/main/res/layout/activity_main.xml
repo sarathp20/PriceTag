@@ -38,6 +38,14 @@
         android:textStyle="italic"
 
         />
+    <Button
+        android:id="@+id/userbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginBottom="10dp"
+        android:text="User Details"
+        />
 
 
     <LinearLayout
