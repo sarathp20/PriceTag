@@ -133,16 +133,16 @@ public class Keyword_Search extends AppCompatActivity {
             Document document;
             try {
                 document = Jsoup.connect(url).get();
-                Elements name = document.select("._3wU53n"); //get name
-                Elements price = document.select("._1vC4OE._2rQ-NK"); //Get price
+                Elements name = document.select("._4rR01T"); //get name
+                Elements price = document.select("._30jeq3._1_WHN1"); //Get price
                 //Elements images = document.select("_3BTv9X");
                 //Elements imageclass = document.select("_3BTv9X");
                 //Elements images = imageclass.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
-                Elements name1 = document.select("._2cLu-l"); //get name
+                Elements name1 = document.select(".s1Q9rs"); //get name
                 //for (Element image : images) {
                 //text.setText(text.getText()+image.attr("src"));
                 //p_image.add((String)image.attr("src"));}
-                Elements price1 = document.select("._1vC4OE"); //Get priceu
+                Elements price1 = document.select("._30jeq3"); //Get priceu
                 for (i = 0; i < price.size() && i < name.size(); i++) {
                     p_name.add(name.get(i).text());
                     p_price.add(price.get(i).text());

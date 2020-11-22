@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class startPage extends AppCompatActivity {
     public static Button logbtn;
     public static Button userBtn;
+    public static Button wishlistbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,13 +21,16 @@ public class startPage extends AppCompatActivity {
         Button test=findViewById(R.id.keySearch);
         userBtn=findViewById(R.id.userbtn);
         logbtn=(Button)findViewById(R.id.logoutbtn);
+        wishlistbtn=(Button)findViewById(R.id.wishbtn);
         if(MainActivity.hidebtn==1){
             logbtn.setVisibility(View.VISIBLE);
             userBtn.setVisibility(View.VISIBLE);
+            wishlistbtn.setVisibility(View.VISIBLE);
         }
         else if(MainActivity.hidebtn==0){
             logbtn.setVisibility(View.GONE);
             userBtn.setVisibility(View.GONE);
+            wishlistbtn.setVisibility(View.GONE);
         }
         test.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +44,13 @@ public class startPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent openCam=new Intent(startPage.this,camPage.class);
                 startActivity(openCam);
+            }
+        });
+        wishlistbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent wish=new Intent(startPage.this,whishList.class);
+                startActivity(wish);
             }
         });
         userBtn.setOnClickListener(new View.OnClickListener() {
