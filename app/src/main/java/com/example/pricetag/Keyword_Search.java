@@ -1,9 +1,5 @@
 package com.example.pricetag;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,58 +7,38 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.text.Html;
-import android.util.FloatProperty;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebChromeClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class Keyword_Search extends AppCompatActivity {
-    List<Product> productList=new ArrayList<>();
     Button search;
-    RecyclerView recyclerView;
+    TextView text;
     ProgressDialog prodiag;
     String productName;
     EditText item;
     ArrayList<String> p_name = new ArrayList<>();
     ArrayList<String> p_price = new ArrayList<>();
-    ArrayList<String> p_rating = new ArrayList<>();
-    ArrayList<String> p_image = new ArrayList<>();
-    ArrayList<String> p_link = new ArrayList<>();
-    ArrayList<String> amaz_p_name = new ArrayList<>();
-    ArrayList<String> amaz_p_price = new ArrayList<>();
-    ArrayList<String> snap_p_name = new ArrayList<>();
-    ArrayList<String> snap_p_price = new ArrayList<>();
-    ArrayList<String> snap_p_link = new ArrayList<>();
-    ArrayList<String> snap_p_image = new ArrayList<>();
-    ArrayList<String> snap_p_rating = new ArrayList<>();
-    ArrayList<String> shop_p_name = new ArrayList<>();
-    ArrayList<String> shop_p_price = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_keyword__search);
+        setContentView(R.layout.key);
+        text=findViewById(R.id.keytext);
         item=findViewById(R.id.keyitem);
-        recyclerView=findViewById(R.id.recycler_view);
-        recyclerView.setVisibility(View.VISIBLE);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
         item.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -79,16 +55,16 @@ public class Keyword_Search extends AppCompatActivity {
     }
     public void getSpeechInput(View view){
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, Locale.getDefault());
         if(intent.resolveActivity(getPackageManager())!=null){
             startActivityForResult(intent,10);
         }
         else{
-            Toast.makeText(this,"This feature is not supported in your device",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"This feature is not supported in your device", Toast.LENGTH_SHORT).show();
         }
     }
-    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         switch(requestCode){
             case 10:
@@ -101,150 +77,34 @@ public class Keyword_Search extends AppCompatActivity {
         }
     }
     public void showDetail() {
-        //  recyclerView.removeAllViewsInLayout();
+
         productName = String.valueOf(item.getText());
-        p_name = new ArrayList<>();
-        p_price = new ArrayList<>();
-        p_rating = new ArrayList<>();
-        p_image = new ArrayList<>();
-        p_link = new ArrayList<>();
-        amaz_p_name = new ArrayList<>();
-        amaz_p_price = new ArrayList<>();
-        snap_p_name = new ArrayList<>();
-        snap_p_price = new ArrayList<>();
-        snap_p_link = new ArrayList<>();
-        snap_p_image = new ArrayList<>();
-        snap_p_rating = new ArrayList<>();
-        shop_p_name = new ArrayList<>();
-        shop_p_price = new ArrayList<>();
         GetData data = new GetData();
         data.execute();
     }
     public void putData(){
-        ArrayList<Product> list = new ArrayList<>();
-        //  for(int k=0;k<list.size();k++){
-        //      list.remove(k);
-        //   }
-        //   adapter=new MyAdapter(null);
-        //  recyclerView.setAdapter(adapter);
-        //   recyclerView.removeAllViewsInLayout();
         String name;
         String price;
         String imgurl;
-        int i=0,j=0;
-
-        try {
-            while (i < p_name.size() && j < snap_p_name.size()) {
-                String name1 = (String) p_name.get(i);
-                String price1 = (String) p_price.get(i);
-                //      String image1 = (String) p_image.get(i);
-                String rating1 = (String) p_rating.get(i);
-                String link1 = (String) p_link.get(i);
-                price1=price1.substring(1);
-                String pricesplit[]=price1.split(",");
-                price1="";
-                for(String a:pricesplit){
-                    price1=price1+a;
-                }
-                String name2 = (String) snap_p_name.get(j);
-                String price2 = (String) snap_p_price.get(j);
-                //  String image2 = (String) snap_p_image.get(i);
-                String rating2 = (String) snap_p_rating.get(j);
-                String link2 = (String) snap_p_link.get(i);
-                price2=price2.substring(4);
-                pricesplit=price2.split(",");
-                price2="";
-                for(String a:pricesplit){
-                    price2=price2+a;
-                }
-                if(Float.parseFloat(price1) < Float.parseFloat(price2)) {
-                    list.add(new Product(name1,Float.parseFloat(rating1),Float.parseFloat(price1),/*image1,*/"Flipkart",link1));
-                    i++;
-                }
-                else {
-                    list.add(new Product(name2,Float.parseFloat(rating2),Float.parseFloat(price2),/*image2,*/"Snapdeal",link2));
-                    j++;
-                }
-            }
-            if(i < p_name.size()) {
-                while (i < p_name.size()) {
-                    String name1 = (String) p_name.get(i);
-                    String price1 = (String) p_price.get(i);
-                    price1=price1.substring(1);
-                    String link1 = (String) p_link.get(i);
-                    String pricesplit[]=price1.split(",");
-                    price1="";
-                    for(String a:pricesplit){
-                        price1=price1+a;
-                    }
-                    // String image1 = (String) p_image.get(i);
-                    String rating1 = (String) p_rating.get(i);
-                    //    String link1 = (String) p_link.get(i);
-                    list.add(new Product(name1,Float.parseFloat(rating1),Float.parseFloat(price1),/*image1,*/"Flipkart",link1));
-                    i++;
-                }
-            }
-            if(j < snap_p_name.size()) {
-                while (j < snap_p_name.size()) {
-                    String name2 = (String) snap_p_name.get(j);
-                    String price2 = (String) snap_p_price.get(j);
-                    price2=price2.substring(4);
-                    String link2 = (String) snap_p_link.get(i);
-                    String[] pricesplit=price2.split(",");
-                    price2="";
-                    for(String a:pricesplit){
-                        price2=price2+a;
-                    }
-                    //      String image2 = (String) snap_p_image.get(i);
-                    //    String link2 = (String) snap_p_link.get(j);
-                    String rating2 = (String) snap_p_rating.get(j);
-                    list.add(new Product(name2,Float.parseFloat(rating2),Float.parseFloat(price2),/*image2,*/"Snapdeal",link2));
-                    j++;
-                }
-            }
-        }
-        catch (Exception e){}
-        Product[] listitems=new Product[list.size()];
-        for(i=0;i<list.size();i++){
-            listitems[i]=new Product(list.get(i).getTitle(),list.get(i).getRating(),list.get(i).getPrice(),/*list.get(i).getImage(),*/list.get(i).getsite(),list.get(i).getlink());
-        }
-        recyclerView.setAdapter(new MyAdapter(listitems));
-       /* for (int i = 0; i < p_price.size() && i < p_name.size(); i++) {
-           name =(String) p_name.get(i);
+        for (int i = 0; i < p_price.size() && i < p_name.size(); i++) {
+            name =(String) p_name.get(i);
             price =(String) p_price.get(i);
 
+            text.setText(text.getText()+name+" "+price+"\n\n\n");
             /*imgurl =(String) p_image.get(i);
             try {
                 InputStream is = (InputStream) new URL(imgurl).getContent();
                 Drawable d = Drawable.createFromStream(is, "src name");
                 }
             catch (Exception e){
+                text.setText(text.getText()+"Couldnt load image\n");
             }*/
-        /*  }*/
-      /*  for (int i = 0; i < amaz_p_price.size() && i < amaz_p_name.size(); i++) {
-            name =(String) amaz_p_name.get(i);
-            price =(String) amaz_p_price.get(i);
+        }
 
-            /*imgurl =(String) p_image.get(i);
-            try {
-                InputStream is = (InputStream) new URL(imgurl).getContent();
-                Drawable d = Drawable.createFromStream(is, "src name");
-                }
-            catch (Exception e){
-            }*/
-        /*  }*/
-         /* for (int i = 0; i < snap_p_name.size() && i < snap_p_price.size(); i++) {
-                name = (String) snap_p_name.get(i);
-                price = (String) snap_p_price.get(i); */
-        /*     }*/
-           /* for (int i = 0; i < shop_p_name.size() && i < shop_p_price.size(); i++) {
-                name = (String) shop_p_name.get(i);
-                price = (String) shop_p_price.get(i);
-            } */
     }
 
     @SuppressLint("StaticFieldLeak")
-    private class GetData extends AsyncTask<Void,Void,Void> {
+    public class GetData extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             prodiag = new ProgressDialog(Keyword_Search.this);
@@ -259,187 +119,42 @@ public class Keyword_Search extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             String[] productSplit = productName.split(" ");
-            String productStringamaz = new String();
-            String productStringflip = new String();
+            String productString = new String();
             int i=0;
             for (String a : productSplit){
                 if(i==0){
-                    productStringflip=a;
-                    productStringamaz=a;
+                    productString=a;
                     i++;
                 }
-                else {
-                    productStringflip = productStringflip + "%20" + a;
-                    productStringamaz=productStringamaz+"+"+a;
-                }
+                else
+                productString=productString+"%20"+a;
             }
-            //  String url = "https://www.flipkart.com/search?q=" + productStringflip + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off";
-            String url= "https://www.flipkart.com/search?q=" + productStringflip + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&sort=price_asc";
-            // String urlamaz = "https://www.amazon.in/s?k="+productStringamaz+"&ref=nb_sb_noss";
-            // String urlsnap = "https://www.snapdeal.com/search?keyword=" + productStringflip + "&santizedKeyword=&sort=rlvncy";
-            String urlsnap = "https://www.snapdeal.com/search?keyword=" + productStringflip + "&santizedKeyword=&sort=plth";
-            //   String urlshop = "https://www.shopclues.com/search?q=" + productStringflip + "&sc_z=4444&z=0&sort_by=score&sort_order=desc";
-            //  String urlamaz="https://www.amazon.in/s?k="+productStringamaz+"&s=relevanceblender&qid=1605100588&ref=sr_st_relevanceblender";
+            String url = "https://www.flipkart.com/search?q=" + productString + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off";
             Document document;
-            //   Document document2;
             try {
                 document = Jsoup.connect(url).get();
-                // Elements all = document.select("._3O0U0u");
-                Elements all = document.select("._2kHMtA");
-                for(i=0;i<all.size();i++) {
-                    //   Elements name = all.get(i).select("._3wU53n"); //get name
-                    Elements name = all.get(i).select("._4rR01T"); //get name
-                    //    Elements price = all.get(i).select("._1vC4OE._2rQ-NK"); //Get price
-                    Elements price = all.get(i).select("._30jeq3._1_WHN1"); //Get price
-                    //    Elements rating = all.get(i).select(".hGSR34");
-                    Elements rating = all.get(i).select("._3LWZlK");
-                    //      String images = all.get(i).select("._1Nyybr ._30XEf0").attr("src");
-                    Elements link = all.get(i).select("._1fQZEK");
-                    p_link.add("https://www.flipkart.com"+link.attr("href"));
-                    p_name.add(name.text());
-                    p_price.add(price.text());
-                    if(rating.text().equals("")){
-                        p_rating.add(("0"));
-                    }
-                    else {
-                        p_rating.add(rating.text());
-                    }
-                    //    p_image.add(images);
-
+                Elements name = document.select("._3wU53n"); //get name
+                Elements price = document.select("._1vC4OE._2rQ-NK"); //Get price
+                //Elements images = document.select("_3BTv9X");
+                //Elements imageclass = document.select("_3BTv9X");
+                //Elements images = imageclass.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+                Elements name1 = document.select("._2cLu-l"); //get name
+                //for (Element image : images) {
+                //text.setText(text.getText()+image.attr("src"));
+                //p_image.add((String)image.attr("src"));}
+                Elements price1 = document.select("._1vC4OE"); //Get priceu
+                for (i = 0; i < price.size() && i < name.size(); i++) {
+                    p_name.add(name.get(i).text());
+                    p_price.add(price.get(i).text());
+                    // p_image.add(images.get(i).attr("src"));
                 }
-
-
+                for (i = 0; i < price1.size() && i < name1.size(); i++) {
+                    p_name.add(name1.get(i).text());
+                    p_price.add(price1.get(i).text());
+                }
+            } catch (Exception e) {
+                text.setText(text.getText() + "couldnt load url");
             }
-            catch (Exception e){Log.d("my","flip1error");}
-
-            try {
-                document = Jsoup.connect(url).get();
-                // Elements all = document.select("._3liAhj");
-                Elements all = document.select("._4ddWXP");
-                for(i=0;i<all.size();i++){
-                    // Elements name1 = all.get(i).select("._2cLu-l");
-                    // Elements price1 = all.get(i).select("._1vC4OE"); //Get price
-                    //  Elements rating1 = all.get(i).select(".hGSR34");
-                    Elements name1 = all.get(i).select(".s1Q9rs");
-                    Elements price1 = all.get(i).select("._30jeq3"); //Get price
-                    Elements rating1 = all.get(i).select("._3LWZlK");
-                    Elements link1 = all.get(i).select("._2rpwqI");
-                    p_link.add("https://www.flipkart.com"+link1.attr("href"));
-                    // Elements images1 = document.getElementsByClass("_1Nyybr _30XEf0");
-                    //  Elements link1=document.select("._2cLu-l");
-                    p_name.add(name1.text());
-                    p_price.add(price1.text());
-                    if(rating1.text().equals("")){
-                        p_rating.add(("0"));
-                    }
-                    else {
-                        p_rating.add(rating1.text());
-                    }
-
-                }
-
-
-            }
-            catch (Exception e){ Log.d("my","flip2error"); }
-               /* document2 = Jsoup.connect(urlamaz).get();
-                Elements all=document2.getElementsByAttributeValueStarting("data-asin","^B0");
-                try {
-                    Elements name2 = document2.getElementsByClass("a-size-base-plus a-color-base a-text-normal");
-                    Elements price2 = document2.getElementsByClass("a-price-whole");
-                    for (i = 0; i < price2.size() && i < name2.size(); i++) {
-                        amaz_p_name.add(name2.get(i).text());
-                        amaz_p_price.add(price2.get(i).text());
-                    }
-                }
-                catch (Exception e){
-
-                } */
-            /*    try {
-                    Elements name3 = document2.getElementsByClass("a-size-medium a-color-base a-text-normal");
-                    Elements price3 = document2.getElementsByClass("a-offscreen");
-                    for (i = 0; i < price3.size() && i < name3.size(); i++) {
-                        amaz_p_name.add(name3.get(i).text());
-                        amaz_p_price.add(price3.get(i).text());
-                    }
-                }
-                catch (Exception e){
-
-                } */
-            try {
-                Document document3=Jsoup.connect(urlsnap).get();
-                Elements all = document3.select(".col-xs-6.favDp.product-tuple-listing.js-tuple");
-                //  Elements namesnap = document3.select(".product-title");
-                //  Elements pricesnap = document3.select(".lfloat product-price");
-                // Elements linksnap = document3.select(".dp-widget-link.hashAdded");
-                //    Elements imagesnap = document3.select(".product-image ");
-
-                //  Elements ratingsnap = document3.select(".filled-stars");
-
-                for(int j=0;j<all.size();j++) {
-                    Elements namesnap = all.get(j).select(".product-title");
-                    Elements pricesnap = all.get(j).select(".lfloat .product-price");
-                    Elements linksnap = all.get(j).select(".dp-widget-link.noUdLine");
-                    Elements ratingsnap = all.get(j).select(".filled-stars");
-                    snap_p_name.add(namesnap.text());
-                    snap_p_price.add(pricesnap.text());
-                    snap_p_link.add(linksnap.attr("href"));
-                    Float rating;
-                    try{
-                        rating=Float.parseFloat(ratingsnap.attr("style").substring(6, 9)) * 5 / 100;}
-                    catch (Exception e){
-                        rating = Float.parseFloat("0");
-                    }
-                    snap_p_rating.add(Float.toString(rating));
-                }
-
-            }
-            catch (Exception e){}
-               /* Document document4=Jsoup.connect(urlshop).get();
-                try{
-                    Elements divs=document4.getElementsByClass("column col3 search_blocks");
-                    Elements priceshop=divs.select("p_price");
-                    for(i=0;i<divs.size();i++){
-                        String nameshtml = divs.get(i).html();
-                        Document namedoc = Jsoup.parseBodyFragment(nameshtml);
-                        Elements h2=namedoc.getElementsByTag("h2");
-                        shop_p_name.add(h2.get(i).text());
-                        shop_p_price.add(priceshop.get(i).text());
-                    }
-                }
-                catch (Exception e){
-
-                } */
-            try {
-                document = Jsoup.connect(url).get();
-                // Elements all = document.select("._3O0U0u");
-                Elements all = document.select("._1xHGtK._373qXS");
-                for(i=0;i<all.size();i++) {
-                    //   Elements name = all.get(i).select("._3wU53n"); //get name
-                    Elements name = all.get(i).select(".IRpwTa"); //get name
-                    //    Elements price = all.get(i).select("._1vC4OE._2rQ-NK"); //Get price
-                    Elements price = all.get(i).select("._30jeq3"); //Get price
-                    //    Elements rating = all.get(i).select(".hGSR34");
-                    //      Elements rating = all.get(i).select("._3eWWd-");
-                    //      String images = all.get(i).select("._1Nyybr ._30XEf0").attr("src");
-                    Elements link = all.get(i).select("._2UzuFa");
-                    p_link.add("https://www.flipkart.com"+link.attr("href"));
-                    p_rating.add(("0"));
-                    p_name.add(name.text());
-                    p_price.add(price.text());
-                   /* if(rating.text().equals("")){
-                        p_rating.add(("0"));
-                    }
-                    else {
-                        p_rating.add(rating.text());
-                    }*/
-                    //    p_image.add(images);
-
-                    //      Log.d("my",p_image.get(i));
-                }
-
-            }
-            catch (Exception e){Log.d("my","flip3error");}
-
             return null;
         }
 
