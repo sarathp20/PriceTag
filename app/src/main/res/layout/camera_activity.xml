@@ -1,44 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#E8EAF6">
     <ImageView
         android:id="@+id/iv_capture"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:rotation="0"
+        android:layout_height="400dp"
+        android:rotation="90"
 
          />
+
     <TextView
+        android:id="@+id/detectedImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detectedImage"
-        android:textSize="25dp"
-
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textRec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="10dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="13dp"
         android:textStyle="bold"
-        android:gravity="center"/>
+        android:textColor="@android:color/background_dark"
+        android:id="@+id/details"/>
     <Button
 
         android:id="@+id/startCamera2"
-
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Find Your Product"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Find Another Product"
         android:textAllCaps="true"
-
+        android:layout_marginTop="5dp"
         android:textAlignment="gravity"
         android:textStyle="bold"
         android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_red_dark"
+        android:background="#5C6BC0"
         />
 
 </LinearLayout>

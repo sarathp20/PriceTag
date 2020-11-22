@@ -4,41 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PriceTag"
-        android:textSize="70dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_marginTop="150dp"
-        android:textColor="@android:color/black"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Price what you see"
-        android:gravity="center"
-        android:textStyle="italic"
-        android:layout_marginBottom="250dp"
+    tools:context=".startPage"
 
-        />
+    android:orientation="vertical"
+    android:background="#E8EAF6">
+
     <Button
+        android:id="@+id/logoutbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginBottom="10dp"
+        android:text="Logout"
+        android:visibility="gone" />
 
-        android:id="@+id/startCamera"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="130dp"
         android:gravity="center"
+        android:text="PriceTag"
+        android:textColor="@android:color/black"
+        android:textSize="70dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginBottom="250dp"
+        android:gravity="center"
+        android:text="Price what you see"
+        android:textStyle="italic"
+
+        />
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Find Your Product"
-        android:textAllCaps="true"
-        android:textAlignment="gravity"
-        android:textStyle="bold"
-        android:textColor="@android:color/background_light"
-        android:background="@android:color/holo_red_dark"
-        />
+        >
+
+        <Button
+
+            android:id="@+id/startCamera"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Image search"
+            android:textAllCaps="true"
+            android:textAlignment="gravity"
+            android:layout_weight="1"
+            android:layout_marginRight=".5dp"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:background="#5C6BC0"
+            />
+        <Button
+
+            android:id="@+id/keySearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="key search"
+            android:textAllCaps="true"
+            android:textAlignment="gravity"
+            android:layout_weight="1"
+            android:layout_marginLeft=".5dp"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:background="#5C6BC0"
+            />
+
+
+    </LinearLayout>
 
 </LinearLayout>
