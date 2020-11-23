@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".userData"></activity>
+        <activity android:name=".ItemDisplay"></activity>
+        <activity android:name=".ItemBuy" />
+        <activity android:name=".Keyword_Search" />
+        <activity android:name=".userData" />
         <activity android:name=".whishList" />
         <activity android:name=".HomePage" />
         <activity android:name=".startPage" />
@@ -58,16 +61,6 @@
             <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="ocr" />
-        </activity>
-        <activity
-            android:name=".Keyword_Search"
-            android:label="@string/app_name"
-            android:parentActivityName=".MainActivity">
-
-            <!-- Parent activity meta-data to support 4.0 and lower -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
         </activity>
 
         <meta-data
