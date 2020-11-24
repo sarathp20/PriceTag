@@ -27,8 +27,6 @@
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".Register"
             android:parentActivityName=".MainActivity">
-
-
         </activity>
         <activity android:name=".Login"
             android:parentActivityName=".MainActivity">
@@ -42,7 +40,7 @@
         </activity>
         <activity
             android:name=".camPage"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".startPage">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data

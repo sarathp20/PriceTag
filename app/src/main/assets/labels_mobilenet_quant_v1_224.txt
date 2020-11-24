@@ -885,7 +885,7 @@ vacuum
 vase
 vault
 velvet
-vending machine
+Laptop Computer
 vestment
 viaduct
 violin
