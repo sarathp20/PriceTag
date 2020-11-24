@@ -1,96 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
 
-    xmlns:tools="http://schemas.android.com/tools"
+android:orientation="vertical">
+<Button
+    android:layout_marginTop="330dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".startPage"
+    android:layout_height="wrap_content"
+    android:text="Login"
+    android:id="@+id/Log"/>
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Register"
+    android:id="@+id/Reg"
+    />
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Continue as Guest"
+    android:id="@+id/wLog"
+    />
 
-    android:orientation="vertical"
-    android:background="#E8EAF6">
-
-    <Button
-        android:id="@+id/logoutbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginBottom="10dp"
-        android:text="Logout"
-        android:visibility="gone" />
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:gravity="center"
-        android:text="PriceTag"
-        android:textColor="@android:color/black"
-        android:textSize="70dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_marginBottom="250dp"
-        android:gravity="center"
-        android:text="Price what you see"
-        android:textStyle="italic"
-
-        />
-    <Button
-        android:id="@+id/wishbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginBottom="10dp"
-        android:text="Wish List"
-        />
-    <Button
-        android:id="@+id/userbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginBottom="10dp"
-        android:text="User Details"
-        />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-        <Button
-
-            android:id="@+id/startCamera"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Image search"
-            android:textAllCaps="true"
-            android:textAlignment="gravity"
-            android:layout_weight="1"
-            android:layout_marginRight=".5dp"
-            android:textColor="@android:color/background_light"
-            android:textStyle="bold"
-            android:background="#5C6BC0"
-            />
-        <Button
-
-            android:id="@+id/keySearch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="key search"
-            android:textAllCaps="true"
-            android:textAlignment="gravity"
-            android:layout_weight="1"
-            android:layout_marginLeft=".5dp"
-            android:textColor="@android:color/background_light"
-            android:textStyle="bold"
-            android:background="#5C6BC0"
-            />
-
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -16,7 +16,7 @@
         <activity android:name=".ItemBuy" />
         <activity android:name=".Keyword_Search" />
         <activity android:name=".userData" />
-        <activity android:name=".whishList" />
+        <activity android:name=".wishList" />
         <activity android:name=".HomePage" />
         <activity android:name=".startPage" />
         <activity android:name=".Register">

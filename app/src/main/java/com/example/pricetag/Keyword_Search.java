@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class Keyword_Search extends AppCompatActivity {
-    List<Product> productList=new ArrayList<>();
     Button search;
     RecyclerView recyclerView;
     ProgressDialog prodiag;
@@ -104,7 +103,6 @@ public class Keyword_Search extends AppCompatActivity {
         }
     }
     public void showDetail() {
-        //  recyclerView.removeAllViewsInLayout();
         p_images = new ArrayList<>();
         productName = String.valueOf(item.getText());
         p_name = new ArrayList<>();

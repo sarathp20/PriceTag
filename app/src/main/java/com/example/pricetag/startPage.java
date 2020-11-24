@@ -10,13 +10,17 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class startPage extends AppCompatActivity {
+
+
     public static Button logbtn;
     public static Button userBtn;
     public static Button wishlistbtn;
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_start_page);
         Button camStart=findViewById(R.id.startCamera);
         Button test=findViewById(R.id.keySearch);
         userBtn=findViewById(R.id.userbtn);
@@ -49,7 +53,7 @@ public class startPage extends AppCompatActivity {
         wishlistbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent wish=new Intent(startPage.this,whishList.class);
+                Intent wish=new Intent(startPage.this,wishList.class);
                 startActivity(wish);
             }
         });
@@ -69,6 +73,7 @@ public class startPage extends AppCompatActivity {
             }
         });
     }
+
 
 
 }
