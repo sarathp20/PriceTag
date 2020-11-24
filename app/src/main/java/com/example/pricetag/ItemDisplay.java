@@ -1,5 +1,6 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -16,7 +17,18 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,21 +37,33 @@ import org.jsoup.select.Elements;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ItemDisplay extends AppCompatActivity {
-    Button buynow;
+    public static final String TAG = "TAG";
+    Button buynow,wishlistbtn;
     TextView itemname;
     TextView itemprice;
     TextView itemorgpricedis;
     String itemnametext;
     String itempricetext;
+
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore fstore;
+    String userID;
+
+
+
     String itemorgpricedistext;
     //TextView itemdiscount;
     ProgressDialog prodiag;
     String url;
     String site;
     ViewPager viewPager;
+
     //ArrayList<Bitmap> imagesdisp1 = new ArrayList<>();
     ArrayList<String> imagesdisp = new ArrayList<>();
     @Override
@@ -47,15 +71,41 @@ public class ItemDisplay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_display);
         Intent intent = getIntent();
+        fstore=FirebaseFirestore.getInstance();
+        fAuth=FirebaseAuth.getInstance();
         url = intent.getStringExtra("url");
         site = intent.getStringExtra("site");
         itemname = findViewById(R.id.itemname);
         itemprice = findViewById(R.id.itemprice);
         itemorgpricedis = findViewById(R.id.itemorgpricedis);
-        //itemdiscount = findViewById(R.id.itemdis);
+//        itemdiscount = findViewById(R.id.itemdis);
         Log.d("my",url);
         Log.d("my",site);
+        wishlistbtn=findViewById(R.id.addwishlist);
+        if(MainActivity.hidebtn==1){
+            wishlistbtn.setVisibility(View.VISIBLE);
+        }
+        if(MainActivity.hidebtn==0){
+            wishlistbtn.setVisibility(View.GONE);
+        }
         buynow = findViewById(R.id.buynow);
+
+        wishlistbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userID=fAuth.getCurrentUser().getUid();
+                CollectionReference collectionReference=fstore.collection(userID);
+                Map<String,Object> wishlist=new HashMap<>();
+                wishlist.put("wishurl",url);
+                wishlist.put("wishsite",site);
+                collectionReference.add(wishlist);
+                Toast.makeText(ItemDisplay.this,"Added to wishlist",Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+
         buynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
