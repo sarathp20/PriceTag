@@ -22,9 +22,6 @@
             android:parentActivityName=".startPage"/>
         <activity android:name=".wishList"
             android:parentActivityName=".startPage"/>
-        <activity android:name=".HomePage" />
-        <activity android:name=".startPage"
-            android:parentActivityName=".MainActivity"/>
         <activity android:name=".Register"
             android:parentActivityName=".MainActivity">
 
