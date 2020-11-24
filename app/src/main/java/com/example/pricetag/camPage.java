@@ -15,9 +15,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +41,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextDetector;
 
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -45,6 +49,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class camPage extends AppCompatActivity {
@@ -88,7 +93,7 @@ public class camPage extends AppCompatActivity {
         retake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, 7);
 
             }
@@ -109,25 +114,25 @@ public class camPage extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.Keyword_Search:
-                        Intent a = new Intent(getApplicationContext(), Keyword_Search.class);
+                        Intent a = new Intent(getApplicationContext(),Keyword_Search.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.Image_Search:
                         return true;
                     case R.id.Wishlist:
-                        Intent b = new Intent(getApplicationContext(), wishList.class);
+                        Intent b = new Intent(getApplicationContext(),wishList.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.My_Account:
                         if(!userID.equals("")){
-                            Intent c  = new Intent(getApplicationContext(), userData.class);
+                            Intent c  = new Intent(getApplicationContext(),userData.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
                         }
                         else{
-                            Intent c  = new Intent(getApplicationContext(), account.class);
+                            Intent c  = new Intent(getApplicationContext(),account.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
                         }
@@ -159,23 +164,23 @@ public class camPage extends AppCompatActivity {
 
 
             FirebaseVisionImage firebaseVisionImage=FirebaseVisionImage.fromBitmap(rotPh);
-           // FirebaseVision firebaseVision=FirebaseVision.getInstance();
+            // FirebaseVision firebaseVision=FirebaseVision.getInstance();
             FirebaseVisionTextDetector firebaseVisionTextDetector=FirebaseVision.getInstance().getVisionTextDetector();
             Task<FirebaseVisionText> task=firebaseVisionTextDetector.detectInImage(firebaseVisionImage);
 
             task.addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                 @Override
                 public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                   List<FirebaseVisionText.Block>blockList=firebaseVisionText.getBlocks();
-                   if(blockList.size()==0){
-                       Toast.makeText(camPage.this, "No Text Detected", Toast.LENGTH_SHORT).show();
-                   }
-                   else{
-                       for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()){
-                           String s=block.getText();
-                           txtRec.setText(s);
-                       }
-                   }
+                    List<FirebaseVisionText.Block>blockList=firebaseVisionText.getBlocks();
+                    if(blockList.size()==0){
+                        Toast.makeText(camPage.this, "No Text Detected", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()){
+                            String s=block.getText();
+                            txtRec.setText(s);
+                        }
+                    }
 
                 }
             });
@@ -190,11 +195,11 @@ public class camPage extends AppCompatActivity {
             try {
                 imageClassifier = new ImageClassifier(this);
             } catch (IOException e) {
-               System.out.println("error in object creation of classifier  "+e);
+                System.out.println("error in object creation of classifier  "+e);
             }
             List<ImageClassifier.Recognition> predicitons = imageClassifier.recognizeImage(
                     photo, 0);
-             predicitonsList = new ArrayList<>();
+            predicitonsList = new ArrayList<>();
             for (ImageClassifier.Recognition recog : predicitons) {
                 predicitonsList.add(recog.getName());
             }
@@ -203,8 +208,8 @@ public class camPage extends AppCompatActivity {
             showDetail();
 
         }
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
 
 
@@ -278,7 +283,7 @@ public class camPage extends AppCompatActivity {
         snap_p_rating = new ArrayList<>();
         shop_p_name = new ArrayList<>();
         shop_p_price = new ArrayList<>();
-        GetData data = new GetData();
+        camPage.GetData data = new camPage.GetData();
         data.execute();
     }
     public void putData(){

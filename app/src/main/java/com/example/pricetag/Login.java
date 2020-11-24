@@ -1,18 +1,19 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,6 +21,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.checkerframework.common.value.qual.StringVal;
 
 public class Login extends AppCompatActivity {
     EditText mEmail,mPassword;
@@ -43,7 +46,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final EditText resetMail=new EditText(view.getContext());
-                final AlertDialog.Builder passwordResetDialog=new AlertDialog.Builder(view.getContext(), R.style.todoDialogLight);
+                final AlertDialog.Builder passwordResetDialog=new AlertDialog.Builder(view.getContext(),R.style.todoDialogLight);
                 passwordResetDialog.setTitle("Reset Password?");
                 passwordResetDialog.setMessage("Enter Your Email To Recieve Password Link" );
                 passwordResetDialog.setView(resetMail);
@@ -118,7 +121,7 @@ public class Login extends AppCompatActivity {
         mregBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Register.class));
+                startActivity(new Intent(getApplicationContext(),Register.class));
             }
         });
     }

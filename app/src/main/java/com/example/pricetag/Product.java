@@ -1,5 +1,7 @@
 package com.example.pricetag;
 
+import android.graphics.Bitmap;
+
 public class Product {
 
     private String title;

@@ -1,5 +1,10 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -8,11 +13,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,6 +28,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
 
 public class wishList extends AppCompatActivity {
     ArrayList<Productwish> productList = new ArrayList<>();
@@ -70,7 +72,7 @@ public class wishList extends AppCompatActivity {
                         links.add(url);
                         sites.add(site);
                     }
-                    GetData data = new GetData();
+                    wishList.GetData data = new wishList.GetData();
                     data.execute();
                 }
             });
@@ -86,12 +88,12 @@ public class wishList extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.Keyword_Search:
-                        Intent b = new Intent(getApplicationContext(), Keyword_Search.class);
+                        Intent b = new Intent(getApplicationContext(),Keyword_Search.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.Image_Search:
-                        Intent a = new Intent(getApplicationContext(), camPage.class);
+                        Intent a = new Intent(getApplicationContext(),camPage.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
                         return true;
@@ -99,12 +101,12 @@ public class wishList extends AppCompatActivity {
                         return true;
                     case R.id.My_Account:
                         if(!userID.equals("")){
-                            Intent c  = new Intent(getApplicationContext(), userData.class);
+                            Intent c  = new Intent(getApplicationContext(),userData.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
                         }
                         else{
-                            Intent c  = new Intent(getApplicationContext(), account.class);
+                            Intent c  = new Intent(getApplicationContext(),account.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
                         }
@@ -181,42 +183,42 @@ public class wishList extends AppCompatActivity {
                     }
                 }
 
-                 else if (site.equals("Snapdeal")) {
+                else if (site.equals("Snapdeal")) {
                     try {
                         document = Jsoup.connect(url).get();
-                            String itempricetext;
-                            String image="";
-                            Elements name = document.select(".pdp-e-i-head");
-                            Elements price = document.select(".payBlkBig");
-                            itempricetext = "₹" + price.text();
-                            String ratingtext="0";
-                            try {
-                                Elements avgrating = document.select(".avrg-rating");
-                                ratingtext=avgrating.text().substring(1, 4);
-                            } catch (Exception e) {
-                            }
-                            try {
-                                Element imgview1 = document.getElementById("bx-pager-left-image-panel");
-                                Elements imagesa = imgview1.select("a");
-                                for (int j = 0; j < imagesa.size(); j++) {
-                                    Elements images = imagesa.get(j).select("img");
-                                    String img1 = images.get(0).attr("src");
-                                    String img2 = images.get(0).attr("lazySrc");
-                                    if (!img1.equals("")) {
-                                        image=img1;
-                                        break;
-                                    }
-                                    if (!img2.equals("")) {
-                                        image=img2;
-                                        break;
-                                    }
+                        String itempricetext;
+                        String image="";
+                        Elements name = document.select(".pdp-e-i-head");
+                        Elements price = document.select(".payBlkBig");
+                        itempricetext = "₹" + price.text();
+                        String ratingtext="0";
+                        try {
+                            Elements avgrating = document.select(".avrg-rating");
+                            ratingtext=avgrating.text().substring(1, 4);
+                        } catch (Exception e) {
+                        }
+                        try {
+                            Element imgview1 = document.getElementById("bx-pager-left-image-panel");
+                            Elements imagesa = imgview1.select("a");
+                            for (int j = 0; j < imagesa.size(); j++) {
+                                Elements images = imagesa.get(j).select("img");
+                                String img1 = images.get(0).attr("src");
+                                String img2 = images.get(0).attr("lazySrc");
+                                if (!img1.equals("")) {
+                                    image=img1;
+                                    break;
                                 }
-                            } catch (Exception e) {
+                                if (!img2.equals("")) {
+                                    image=img2;
+                                    break;
+                                }
                             }
-                            try {
-                                Elements imgview2 = document.select(".cloudzoom");
-                                String img3 = imgview2.attr("src");
-                                image=img3;
+                        } catch (Exception e) {
+                        }
+                        try {
+                            Elements imgview2 = document.select(".cloudzoom");
+                            String img3 = imgview2.attr("src");
+                            image=img3;
 
                         } catch (Exception e) {
                         }
@@ -225,7 +227,7 @@ public class wishList extends AppCompatActivity {
                         Log.d("my", "Connection Error");
                     }
                 }
-        }
+            }
             return null;
         }
 

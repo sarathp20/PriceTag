@@ -1,20 +1,33 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jsoup.Jsoup;
@@ -22,8 +35,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ItemDisplay extends AppCompatActivity {
@@ -67,22 +82,22 @@ public class ItemDisplay extends AppCompatActivity {
         wishlistbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            try{
-                userID=fAuth.getCurrentUser().getUid();}
-            catch (Exception e){
-                userID="";
-            }
-            if(!userID.equals("")) {
-                CollectionReference collectionReference = fstore.collection(userID);
-                Map<String, Object> wishlist = new HashMap<>();
-                wishlist.put("wishurl", url);
-                wishlist.put("wishsite", site);
-                collectionReference.add(wishlist);
-                Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                Toast.makeText(ItemDisplay.this, "Log in to add", Toast.LENGTH_SHORT).show();
-            }
+                try{
+                    userID=fAuth.getCurrentUser().getUid();}
+                catch (Exception e){
+                    userID="";
+                }
+                if(!userID.equals("")) {
+                    CollectionReference collectionReference = fstore.collection(userID);
+                    Map<String, Object> wishlist = new HashMap<>();
+                    wishlist.put("wishurl", url);
+                    wishlist.put("wishsite", site);
+                    collectionReference.add(wishlist);
+                    Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(ItemDisplay.this, "Log in to add", Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
@@ -96,7 +111,7 @@ public class ItemDisplay extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        GetData data = new GetData();
+        ItemDisplay.GetData data = new ItemDisplay.GetData();
         data.execute();
     }
     public void putData(){

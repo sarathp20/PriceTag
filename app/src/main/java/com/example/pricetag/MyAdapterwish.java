@@ -48,7 +48,7 @@ public class MyAdapterwish extends RecyclerView.Adapter<MyAdapterwish.MyAdapterV
         holder.itemid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(parent.getContext(), ItemDisplay.class);
+                Intent intent = new Intent(parent.getContext(),ItemDisplay.class);
                 intent.putExtra("url",p.getlink());
                 intent.putExtra("site",p.getsite());
                 parent.getContext().startActivity(intent);
@@ -56,7 +56,7 @@ public class MyAdapterwish extends RecyclerView.Adapter<MyAdapterwish.MyAdapterV
 
         });
         if(!p.getImage().equals(""))
-        Glide.with(parent.getContext()).load(p.getImage()).into(holder.image);
+            Glide.with(parent.getContext()).load(p.getImage()).into(holder.image);
 
     }
 

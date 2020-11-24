@@ -1,12 +1,12 @@
 package com.example.pricetag;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class ItemBuy extends AppCompatActivity {
     WebView webView;

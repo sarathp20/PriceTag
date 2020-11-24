@@ -1,16 +1,19 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
 
 public class BottomNav extends AppCompatActivity {
     FirebaseAuth fAuth;
@@ -38,23 +41,23 @@ public class BottomNav extends AppCompatActivity {
                     case R.id.Keyword_Search:
                         return true;
                     case R.id.Image_Search:
-                        Intent a = new Intent(getApplicationContext(), camPage.class);
+                        Intent a = new Intent(getApplicationContext(),camPage.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.Wishlist:
-                        Intent b = new Intent(getApplicationContext(), wishList.class);
+                        Intent b = new Intent(getApplicationContext(),wishList.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.My_Account:
                         if(!userID.equals("")){
-                            Intent c  = new Intent(getApplicationContext(), userData.class);
+                            Intent c  = new Intent(getApplicationContext(),userData.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
                         }
                         else{
-                            Intent c  = new Intent(getApplicationContext(), account.class);
+                            Intent c  = new Intent(getApplicationContext(),account.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
                         }

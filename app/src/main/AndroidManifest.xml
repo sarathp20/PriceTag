@@ -17,11 +17,11 @@
         <activity android:name=".ItemBuy"
             android:parentActivityName=".ItemDisplay"/>
         <activity android:name=".Keyword_Search"
-            android:parentActivityName=".startPage"/>
+            android:parentActivityName=".BottomNav"/>
         <activity android:name=".userData"
-            android:parentActivityName=".startPage"/>
+            android:parentActivityName=".BottomNav"/>
         <activity android:name=".wishList"
-            android:parentActivityName=".startPage"/>
+            android:parentActivityName=".BottomNav"/>
         <activity android:name=".Register"
             android:parentActivityName=".MainActivity">
 

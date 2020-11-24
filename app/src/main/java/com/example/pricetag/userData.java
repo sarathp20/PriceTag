@@ -1,15 +1,15 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,7 +50,7 @@ public class userData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fAuth.signOut();
-                startActivity(new Intent(userData.this, account.class));
+                startActivity(new Intent(userData.this,account.class));
                 finish();
 
             }
@@ -62,17 +62,17 @@ public class userData extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.Keyword_Search:
-                        Intent b = new Intent(getApplicationContext(), Keyword_Search.class);
+                        Intent b = new Intent(getApplicationContext(),Keyword_Search.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.Image_Search:
-                        Intent a = new Intent(getApplicationContext(), camPage.class);
+                        Intent a = new Intent(getApplicationContext(),camPage.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.Wishlist:
-                        Intent c  = new Intent(getApplicationContext(), wishList.class);
+                        Intent c  = new Intent(getApplicationContext(),wishList.class);
                         startActivity(c);
                         overridePendingTransition(0,0);
                         return true;
