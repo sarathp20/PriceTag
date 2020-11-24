@@ -68,8 +68,9 @@
     <Button
 
         android:id="@+id/startCamera"
-        android:layout_width="170dp"
-        android:layout_height="45dp"
+        android:layout_width="189dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="548dp"
         android:layout_weight="1"
         android:background="#5C6BC0"
         android:text="Image search"
@@ -77,14 +78,15 @@
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
 
         android:id="@+id/keySearch"
-        android:layout_width="237dp"
-        android:layout_height="49dp"
+        android:layout_width="222dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="548dp"
         android:layout_weight="1"
         android:background="#5C6BC0"
         android:text="key search"
@@ -92,8 +94,8 @@
         android:textAllCaps="true"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="174dp" />
+        app:layout_constraintStart_toEndOf="@+id/startCamera"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
