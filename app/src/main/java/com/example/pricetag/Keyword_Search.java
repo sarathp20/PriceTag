@@ -1,45 +1,46 @@
 package com.example.pricetag;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.text.Html;
-import android.util.FloatProperty;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebChromeClient;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class Keyword_Search extends AppCompatActivity {
-    Button search;
     RecyclerView recyclerView;
     ProgressDialog prodiag;
     String productName;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    String userID;
     EditText item;
     ArrayList<Bitmap> p_images = new ArrayList<>();
     ArrayList<String> p_name = new ArrayList<>();
@@ -73,6 +74,49 @@ public class Keyword_Search extends AppCompatActivity {
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     showDetail();
                     return true;
+                }
+                return false;
+            }
+        });
+        fAuth=FirebaseAuth.getInstance();
+        fStore=FirebaseFirestore.getInstance();
+        try {
+            userID = fAuth.getCurrentUser().getUid();
+        }
+        catch (Exception e){
+            userID = "";
+        }
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.nav_view);
+        navigation.setSelectedItemId(R.id.Keyword_Search);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.Keyword_Search:
+                        return true;
+                    case R.id.Image_Search:
+                        Intent a = new Intent(getApplicationContext(), camPage.class);
+                        startActivity(a);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.Wishlist:
+                        Intent b = new Intent(getApplicationContext(), wishList.class);
+                        startActivity(b);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.My_Account:
+                        if(!userID.equals("")){
+                        Intent c  = new Intent(getApplicationContext(), userData.class);
+                        startActivity(c);
+                        overridePendingTransition(0,0);
+                        }
+                        else{
+                            Intent c  = new Intent(getApplicationContext(), account.class);
+                            startActivity(c);
+                            overridePendingTransition(0,0);
+                        }
+
+                        return true;
                 }
                 return false;
             }
