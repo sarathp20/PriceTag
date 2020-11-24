@@ -10,14 +10,11 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-
     public static int hidebtn;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_page);
+        setContentView(R.layout.activity_main);
         Button reg = findViewById(R.id.Reg);
         Button log = findViewById(R.id.Log);
         Button wlog = findViewById(R.id.wLog);
@@ -46,6 +43,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

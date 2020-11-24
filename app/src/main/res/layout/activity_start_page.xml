@@ -1,29 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".startPage"
 
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#E8EAF6">
     <Button
-        android:layout_marginTop="330dp"
+        android:id="@+id/logoutbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginBottom="10dp"
+        android:text="Logout"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/Log"/>
-    <Button
+        android:layout_marginTop="124dp"
+        android:gravity="center"
+        android:text="PriceTag"
+        android:textColor="@android:color/black"
+        android:textSize="70dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/Reg"
-        />
+        android:layout_height="49dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Price what you see"
+
+        android:textStyle="italic"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:layout_editor_absoluteX="0dp" />
+
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/wishbtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Continue as Guest"
-        android:id="@+id/wLog"
-        />
+        android:layout_gravity="right"
+        android:layout_marginTop="400dp"
+        android:text="Wish List"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/userbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="User Details"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wishbtn"
+        app:layout_constraintVertical_bias="0.242"
+        tools:layout_editor_absoluteX="267dp" />
+
+    <Button
+
+        android:id="@+id/startCamera"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="#5C6BC0"
+        android:text="Image search"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+
+        android:id="@+id/keySearch"
+        android:layout_width="237dp"
+        android:layout_height="49dp"
+        android:layout_weight="1"
+        android:background="#5C6BC0"
+        android:text="key search"
+        android:textAlignment="gravity"
+        android:textAllCaps="true"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="174dp" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
