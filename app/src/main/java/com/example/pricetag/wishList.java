@@ -183,42 +183,42 @@ public class wishList extends AppCompatActivity {
                     }
                 }
 
-                else if (site.equals("Snapdeal")) {
+                 else if (site.equals("Snapdeal")) {
                     try {
                         document = Jsoup.connect(url).get();
-                        String itempricetext;
-                        String image="";
-                        Elements name = document.select(".pdp-e-i-head");
-                        Elements price = document.select(".payBlkBig");
-                        itempricetext = "₹" + price.text();
-                        String ratingtext="0";
-                        try {
-                            Elements avgrating = document.select(".avrg-rating");
-                            ratingtext=avgrating.text().substring(1, 4);
-                        } catch (Exception e) {
-                        }
-                        try {
-                            Element imgview1 = document.getElementById("bx-pager-left-image-panel");
-                            Elements imagesa = imgview1.select("a");
-                            for (int j = 0; j < imagesa.size(); j++) {
-                                Elements images = imagesa.get(j).select("img");
-                                String img1 = images.get(0).attr("src");
-                                String img2 = images.get(0).attr("lazySrc");
-                                if (!img1.equals("")) {
-                                    image=img1;
-                                    break;
-                                }
-                                if (!img2.equals("")) {
-                                    image=img2;
-                                    break;
-                                }
+                            String itempricetext;
+                            String image="";
+                            Elements name = document.select(".pdp-e-i-head");
+                            Elements price = document.select(".payBlkBig");
+                            itempricetext = "₹" + price.text();
+                            String ratingtext="0";
+                            try {
+                                Elements avgrating = document.select(".avrg-rating");
+                                ratingtext=avgrating.text().substring(1, 4);
+                            } catch (Exception e) {
                             }
-                        } catch (Exception e) {
-                        }
-                        try {
-                            Elements imgview2 = document.select(".cloudzoom");
-                            String img3 = imgview2.attr("src");
-                            image=img3;
+                            try {
+                                Element imgview1 = document.getElementById("bx-pager-left-image-panel");
+                                Elements imagesa = imgview1.select("a");
+                                for (int j = 0; j < imagesa.size(); j++) {
+                                    Elements images = imagesa.get(j).select("img");
+                                    String img1 = images.get(0).attr("src");
+                                    String img2 = images.get(0).attr("lazySrc");
+                                    if (!img1.equals("")) {
+                                        image=img1;
+                                        break;
+                                    }
+                                    if (!img2.equals("")) {
+                                        image=img2;
+                                        break;
+                                    }
+                                }
+                            } catch (Exception e) {
+                            }
+                            try {
+                                Elements imgview2 = document.select(".cloudzoom");
+                                String img3 = imgview2.attr("src");
+                                image=img3;
 
                         } catch (Exception e) {
                         }
@@ -227,7 +227,7 @@ public class wishList extends AppCompatActivity {
                         Log.d("my", "Connection Error");
                     }
                 }
-            }
+        }
             return null;
         }
 

@@ -114,12 +114,12 @@ public class Register extends AppCompatActivity {
         });
 
 
-        mcancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),account.class));
-            }
-        });
+    mcancel.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            startActivity(new Intent(getApplicationContext(),account.class));
+        }
+    });
 
 
     }

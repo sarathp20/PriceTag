@@ -56,7 +56,7 @@ public class MyAdapterwish extends RecyclerView.Adapter<MyAdapterwish.MyAdapterV
 
         });
         if(!p.getImage().equals(""))
-            Glide.with(parent.getContext()).load(p.getImage()).into(holder.image);
+        Glide.with(parent.getContext()).load(p.getImage()).into(holder.image);
 
     }
 

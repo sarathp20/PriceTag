@@ -82,22 +82,22 @@ public class ItemDisplay extends AppCompatActivity {
         wishlistbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
-                    userID=fAuth.getCurrentUser().getUid();}
-                catch (Exception e){
-                    userID="";
-                }
-                if(!userID.equals("")) {
-                    CollectionReference collectionReference = fstore.collection(userID);
-                    Map<String, Object> wishlist = new HashMap<>();
-                    wishlist.put("wishurl", url);
-                    wishlist.put("wishsite", site);
-                    collectionReference.add(wishlist);
-                    Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(ItemDisplay.this, "Log in to add", Toast.LENGTH_SHORT).show();
-                }
+            try{
+                userID=fAuth.getCurrentUser().getUid();}
+            catch (Exception e){
+                userID="";
+            }
+            if(!userID.equals("")) {
+                CollectionReference collectionReference = fstore.collection(userID);
+                Map<String, Object> wishlist = new HashMap<>();
+                wishlist.put("wishurl", url);
+                wishlist.put("wishsite", site);
+                collectionReference.add(wishlist);
+                Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(ItemDisplay.this, "Log in to add", Toast.LENGTH_SHORT).show();
+            }
             }
 
         });

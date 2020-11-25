@@ -115,9 +115,9 @@ public class Keyword_Search extends AppCompatActivity {
                         return true;
                     case R.id.My_Account:
                         if(!userID.equals("")){
-                            Intent c  = new Intent(getApplicationContext(),userData.class);
-                            startActivity(c);
-                            overridePendingTransition(0,0);
+                        Intent c  = new Intent(getApplicationContext(),userData.class);
+                        startActivity(c);
+                        overridePendingTransition(0,0);
                         }
                         else{
                             Intent c  = new Intent(getApplicationContext(),account.class);

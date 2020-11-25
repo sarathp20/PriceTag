@@ -164,23 +164,23 @@ public class camPage extends AppCompatActivity {
 
 
             FirebaseVisionImage firebaseVisionImage=FirebaseVisionImage.fromBitmap(rotPh);
-            // FirebaseVision firebaseVision=FirebaseVision.getInstance();
+           // FirebaseVision firebaseVision=FirebaseVision.getInstance();
             FirebaseVisionTextDetector firebaseVisionTextDetector=FirebaseVision.getInstance().getVisionTextDetector();
             Task<FirebaseVisionText> task=firebaseVisionTextDetector.detectInImage(firebaseVisionImage);
 
             task.addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                 @Override
                 public void onSuccess(FirebaseVisionText firebaseVisionText) {
-                    List<FirebaseVisionText.Block>blockList=firebaseVisionText.getBlocks();
-                    if(blockList.size()==0){
-                        Toast.makeText(camPage.this, "No Text Detected", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()){
-                            String s=block.getText();
-                            txtRec.setText(s);
-                        }
-                    }
+                   List<FirebaseVisionText.Block>blockList=firebaseVisionText.getBlocks();
+                   if(blockList.size()==0){
+                       Toast.makeText(camPage.this, "No Text Detected", Toast.LENGTH_SHORT).show();
+                   }
+                   else{
+                       for (FirebaseVisionText.Block block : firebaseVisionText.getBlocks()){
+                           String s=block.getText();
+                           txtRec.setText(s);
+                       }
+                   }
 
                 }
             });
@@ -195,11 +195,11 @@ public class camPage extends AppCompatActivity {
             try {
                 imageClassifier = new ImageClassifier(this);
             } catch (IOException e) {
-                System.out.println("error in object creation of classifier  "+e);
+               System.out.println("error in object creation of classifier  "+e);
             }
             List<ImageClassifier.Recognition> predicitons = imageClassifier.recognizeImage(
                     photo, 0);
-            predicitonsList = new ArrayList<>();
+             predicitonsList = new ArrayList<>();
             for (ImageClassifier.Recognition recog : predicitons) {
                 predicitonsList.add(recog.getName());
             }
@@ -208,8 +208,8 @@ public class camPage extends AppCompatActivity {
             showDetail();
 
         }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+            super.onActivityResult(requestCode, resultCode, data);
+        }
 
 
 
