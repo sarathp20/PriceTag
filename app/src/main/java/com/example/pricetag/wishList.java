@@ -29,8 +29,6 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
-import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
-
 public class wishList extends AppCompatActivity {
     ArrayList<Productwish> productList = new ArrayList<>();
     TextView textview;
