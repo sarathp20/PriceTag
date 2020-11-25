@@ -26,12 +26,14 @@
         <activity android:name=".startPage"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".Register"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".Login"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
