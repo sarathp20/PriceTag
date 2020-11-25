@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         wlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent logOp = new Intent(MainActivity.this, Keyword_Search.class);
+                Intent logOp = new Intent(MainActivity.this, camPage.class);
                 startActivity(logOp);
             }
         });
