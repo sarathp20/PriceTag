@@ -84,7 +84,6 @@ public class camPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity);
-        EnableRuntimePermission();
         recyclerView=findViewById(R.id.recycler_view);
         recyclerView.setVisibility(View.VISIBLE);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
@@ -261,7 +260,7 @@ public class camPage extends AppCompatActivity {
         switch (requestCode) {
             case RequestPermissionCode:
                 if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(camPage.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(camPage.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(camPage.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
                 }
