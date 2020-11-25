@@ -10,18 +10,16 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    public static int hidebtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button reg = findViewById(R.id.Reg);
-        Button log = findViewById(R.id.Log);
-        Button wlog = findViewById(R.id.wLog);
+        Button reg = findViewById(R.id.register);
+        Button log = findViewById(R.id.signin);
+        Button wlog = findViewById(R.id.withoutsignin);
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hidebtn=1;
                 Intent regOp = new Intent(MainActivity.this, Register.class);
                 startActivity(regOp);
             }
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         log.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hidebtn=1;
                 Intent logOp = new Intent(MainActivity.this, Login.class);
                 startActivity(logOp);
             }
@@ -37,8 +34,7 @@ public class MainActivity extends AppCompatActivity {
         wlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hidebtn=0;
-                Intent logOp = new Intent(MainActivity.this, startPage.class);
+                Intent logOp = new Intent(MainActivity.this, Keyword_Search.class);
                 startActivity(logOp);
             }
         });

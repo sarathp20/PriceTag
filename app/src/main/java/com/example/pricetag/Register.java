@@ -103,7 +103,7 @@ public class Register extends AppCompatActivity {
                                     Log.d(TAG, "onFailure: "+e.toString());
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(),startPage.class));
+                            startActivity(new Intent(getApplicationContext(),Keyword_Search.class));
                         }else{
                             Toast.makeText(Register.this,"Error!"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
 
@@ -117,7 +117,7 @@ public class Register extends AppCompatActivity {
     mcancel.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            startActivity(new Intent(getApplicationContext(),Login.class));
+            startActivity(new Intent(getApplicationContext(),account.class));
         }
     });
 

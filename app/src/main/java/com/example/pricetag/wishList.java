@@ -1,16 +1,21 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,6 +29,8 @@ import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 
+import static com.google.android.gms.common.internal.safeparcel.SafeParcelable.NULL;
+
 public class wishList extends AppCompatActivity {
     ArrayList<Productwish> productList = new ArrayList<>();
     TextView textview;
@@ -34,30 +41,79 @@ public class wishList extends AppCompatActivity {
     ArrayList<String> links = new ArrayList<>();
     ArrayList<String> sites = new ArrayList<>();
     RecyclerView recyclerView;
+    TextView notlogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wish_list);
+        notlogin=findViewById(R.id.notlogin);
         recyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         fAuth=FirebaseAuth.getInstance();
         fStore=FirebaseFirestore.getInstance();
-        userID=fAuth.getCurrentUser().getUid();
-
-        CollectionReference collectionReference=fStore.collection(userID);
-        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                    String url=documentSnapshot.getString("wishurl");
-                    String site=documentSnapshot.getString("wishsite");
-                    links.add(url);
-                    sites.add(site);
+        try {
+            userID = fAuth.getCurrentUser().getUid();
+        }
+        catch (Exception e){
+            userID = "";
+        }
+        if(!userID.equals("")) {
+            notlogin.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            CollectionReference collectionReference = fStore.collection(userID);
+            collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        String url = documentSnapshot.getString("wishurl");
+                        String site = documentSnapshot.getString("wishsite");
+                        links.add(url);
+                        sites.add(site);
+                    }
+                    wishList.GetData data = new wishList.GetData();
+                    data.execute();
                 }
-                wishList.GetData data = new wishList.GetData();
-                data.execute();
+            });
+        }
+        else{
+            notlogin.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
+        }
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.nav_view);
+        navigation.setSelectedItemId(R.id.Wishlist);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.Keyword_Search:
+                        Intent b = new Intent(getApplicationContext(),Keyword_Search.class);
+                        startActivity(b);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.Image_Search:
+                        Intent a = new Intent(getApplicationContext(),camPage.class);
+                        startActivity(a);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.Wishlist:
+                        return true;
+                    case R.id.My_Account:
+                        if(!userID.equals("")){
+                            Intent c  = new Intent(getApplicationContext(),userData.class);
+                            startActivity(c);
+                            overridePendingTransition(0,0);
+                        }
+                        else{
+                            Intent c  = new Intent(getApplicationContext(),account.class);
+                            startActivity(c);
+                            overridePendingTransition(0,0);
+                        }
+
+                        return true;
+                }
+                return false;
             }
         });
 

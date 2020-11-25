@@ -1,14 +1,17 @@
 package com.example.pricetag;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -21,7 +24,7 @@ public class userData extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userID;
-    Button logoutbt,backbt;
+    Button logoutbt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,6 @@ public class userData extends AppCompatActivity {
         phone=findViewById(R.id.userPhone);
         email=findViewById(R.id.userEmail);
         logoutbt=findViewById(R.id.logoubtn);
-        backbt=findViewById(R.id.backbtn);
         fAuth=FirebaseAuth.getInstance();
         fStore=FirebaseFirestore.getInstance();
         userID=fAuth.getCurrentUser().getUid();
@@ -44,19 +46,40 @@ public class userData extends AppCompatActivity {
                 email.setText(documentSnapshot.getString("email"));
             }
         });
-        backbt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent keySer=new Intent(userData.this,startPage.class);
-                startActivity(keySer);
-            }
-        });
         logoutbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fAuth.signOut();
-                startActivity(new Intent(userData.this,Login.class));
+                startActivity(new Intent(userData.this,account.class));
                 finish();
+
+            }
+        });
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.nav_view);
+        navigation.setSelectedItemId(R.id.My_Account);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.Keyword_Search:
+                        Intent b = new Intent(getApplicationContext(),Keyword_Search.class);
+                        startActivity(b);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.Image_Search:
+                        Intent a = new Intent(getApplicationContext(),camPage.class);
+                        startActivity(a);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.Wishlist:
+                        Intent c  = new Intent(getApplicationContext(),wishList.class);
+                        startActivity(c);
+                        overridePendingTransition(0,0);
+                        return true;
+                    case R.id.My_Account:
+                        return true;
+                }
+                return false;
             }
         });
     }

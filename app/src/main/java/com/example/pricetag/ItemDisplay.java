@@ -49,14 +49,9 @@ public class ItemDisplay extends AppCompatActivity {
     TextView itemorgpricedis;
     String itemnametext;
     String itempricetext;
-
-
     FirebaseAuth fAuth;
     FirebaseFirestore fstore;
     String userID;
-
-
-
     String itemorgpricedistext;
     //TextView itemdiscount;
     ProgressDialog prodiag;
@@ -82,25 +77,27 @@ public class ItemDisplay extends AppCompatActivity {
         Log.d("my",url);
         Log.d("my",site);
         wishlistbtn=findViewById(R.id.addwishlist);
-        if(MainActivity.hidebtn==1){
-            wishlistbtn.setVisibility(View.VISIBLE);
-        }
-        if(MainActivity.hidebtn==0){
-            wishlistbtn.setVisibility(View.GONE);
-        }
         buynow = findViewById(R.id.buynow);
 
         wishlistbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userID=fAuth.getCurrentUser().getUid();
-                CollectionReference collectionReference=fstore.collection(userID);
-                Map<String,Object> wishlist=new HashMap<>();
-                wishlist.put("wishurl",url);
-                wishlist.put("wishsite",site);
+            try{
+                userID=fAuth.getCurrentUser().getUid();}
+            catch (Exception e){
+                userID="";
+            }
+            if(!userID.equals("")) {
+                CollectionReference collectionReference = fstore.collection(userID);
+                Map<String, Object> wishlist = new HashMap<>();
+                wishlist.put("wishurl", url);
+                wishlist.put("wishsite", site);
                 collectionReference.add(wishlist);
-                Toast.makeText(ItemDisplay.this,"Added to wishlist",Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(ItemDisplay.this, "Log in to add", Toast.LENGTH_SHORT).show();
+            }
             }
 
         });
