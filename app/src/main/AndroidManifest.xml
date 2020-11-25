@@ -11,7 +11,8 @@
         android:label="PriceTag"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity android:name=".account"></activity>
         <activity android:name=".BottomNav" />
         <activity

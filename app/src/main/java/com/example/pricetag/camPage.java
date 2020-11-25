@@ -34,6 +34,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ml.vision.FirebaseVision;
@@ -71,7 +72,7 @@ public class camPage extends AppCompatActivity {
     ArrayList<String> shop_p_price = new ArrayList<>();
     String productName;
     List<String>predicitonsList;
-    Button retake;
+    FloatingActionButton retake;
     int flag=0;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
