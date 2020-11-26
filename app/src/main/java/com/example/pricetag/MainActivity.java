@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         fAuth=FirebaseAuth.getInstance();
         if(fAuth.getCurrentUser()!=null){
             startActivity(new Intent(getApplicationContext(), Keyword_Search.class));
+            finish();
         }
         Button reg = findViewById(R.id.register);
         Button log = findViewById(R.id.signin);
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent regOp = new Intent(MainActivity.this, Register.class);
                 startActivity(regOp);
+                finish();
             }
         });
         log.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent logOp = new Intent(MainActivity.this, Login.class);
                 startActivity(logOp);
+                finish();
             }
         });
         wlog.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent logOp = new Intent(MainActivity.this, camPage.class);
                 startActivity(logOp);
+                finish();
             }
         });
     }
