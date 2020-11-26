@@ -50,9 +50,7 @@ public class userData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fAuth.signOut();
-                startActivity(new Intent(userData.this,account.class));
-                finish();
-
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.nav_view);
