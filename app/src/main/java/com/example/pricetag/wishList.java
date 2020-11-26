@@ -89,11 +89,13 @@ public class wishList extends AppCompatActivity {
                         Intent b = new Intent(getApplicationContext(),Keyword_Search.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.Image_Search:
                         Intent a = new Intent(getApplicationContext(),camPage.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.Wishlist:
                         return true;
@@ -102,11 +104,13 @@ public class wishList extends AppCompatActivity {
                             Intent c  = new Intent(getApplicationContext(),userData.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
+                            finish();
                         }
                         else{
                             Intent c  = new Intent(getApplicationContext(),account.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
+                            finish();
                         }
 
                         return true;

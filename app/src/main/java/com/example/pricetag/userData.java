@@ -50,7 +50,8 @@ public class userData extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 fAuth.signOut();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(userData.this, MainActivity.class));
+                finish();
             }
         });
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.nav_view);
@@ -63,16 +64,19 @@ public class userData extends AppCompatActivity {
                         Intent b = new Intent(getApplicationContext(),Keyword_Search.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.Image_Search:
                         Intent a = new Intent(getApplicationContext(),camPage.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.Wishlist:
                         Intent c  = new Intent(getApplicationContext(),wishList.class);
                         startActivity(c);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.My_Account:
                         return true;
