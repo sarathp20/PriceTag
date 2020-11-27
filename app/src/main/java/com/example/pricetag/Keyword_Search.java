@@ -57,6 +57,14 @@ public class Keyword_Search extends AppCompatActivity {
     ArrayList<String> shop_p_name = new ArrayList<>();
     ArrayList<String> shop_p_price = new ArrayList<>();
     @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keyword__search);

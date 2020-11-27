@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#E8EAF6">
+    android:background="#E8EAF6"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -87,16 +87,17 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/startCamera2"
-        android:layout_width="82dp"
-        android:layout_height="82dp"
+        android:layout_width="wrap_content"
+        android:layout_height="99dp"
         android:layout_alignBottom="@+id/recycler_view"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end|bottom"
-        android:layout_marginEnd="173dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginEnd="175dp"
+        android:layout_marginBottom="71dp"
         android:background="#FBF5F5"
         android:backgroundTint="#9668EA"
         android:src="@drawable/cameraicon"
         android:visibility="visible"
+        app:fabSize="normal"
         tools:visibility="visible" />
 </RelativeLayout>

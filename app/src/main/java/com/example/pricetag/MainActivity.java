@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent regOp = new Intent(MainActivity.this, Register.class);
                 startActivity(regOp);
+                finish();
 
             }
         });
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent logOp = new Intent(MainActivity.this, Login.class);
                 startActivity(logOp);
+                finish();
 
             }
         });
@@ -44,8 +46,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent logOp = new Intent(MainActivity.this, camPage.class);
                 startActivity(logOp);
+                finish();
 
             }
         });
     }
+
 }

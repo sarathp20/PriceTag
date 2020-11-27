@@ -65,6 +65,7 @@
                     android:textStyle="bold"
                     android:background="@drawable/rounded_button"
                     android:text="Login"
+                    android:textAllCaps="false"
                     android:textSize="18dp"
                     android:textColor="@color/darkblue"/>
 
@@ -80,6 +81,7 @@
                     android:textStyle="bold"
                     android:background="@drawable/rounded_button"
                     android:text="Register"
+                    android:textAllCaps="false"
                     android:fontFamily="sans-serif-light"
                     android:textSize="18dp"
                     android:textColor="@color/darkblue"/>
@@ -96,6 +98,7 @@
                     android:fontFamily="sans-serif-light"
                     android:textStyle="bold"
                     android:text="Continue as Guest"
+                    android:textAllCaps="false"
                     android:background="@drawable/rounded_button"
                     android:textSize="18dp"
                     android:textColor="@color/darkblue"/>
