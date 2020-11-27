@@ -114,6 +114,7 @@ public class camPage extends AppCompatActivity {
                         Intent a = new Intent(getApplicationContext(),Keyword_Search.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.Image_Search:
                         return true;
@@ -121,17 +122,20 @@ public class camPage extends AppCompatActivity {
                         Intent b = new Intent(getApplicationContext(),wishList.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.My_Account:
                         if(!userID.equals("")){
                             Intent c  = new Intent(getApplicationContext(),userData.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
+                            finish();
                         }
                         else{
                             Intent c  = new Intent(getApplicationContext(),account.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
+                            finish();
                         }
 
                         return true;

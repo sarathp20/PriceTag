@@ -30,6 +30,7 @@ public class account extends AppCompatActivity {
             public void onClick(View view) {
                 Intent regOp = new Intent(account.this, Register.class);
                 startActivity(regOp);
+                finish();
             }
         });
         log.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +38,7 @@ public class account extends AppCompatActivity {
             public void onClick(View view) {
                 Intent logOp = new Intent(account.this, Login.class);
                 startActivity(logOp);
+                finish();
             }
         });
         Log.d("my","account created");
@@ -58,27 +60,32 @@ public class account extends AppCompatActivity {
                         Intent a = new Intent(getApplicationContext(),Keyword_Search.class);
                         startActivity(a);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.Image_Search:
                         Intent e = new Intent(getApplicationContext(),camPage.class);
                         startActivity(e);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.Wishlist:
                         Intent b = new Intent(getApplicationContext(),wishList.class);
                         startActivity(b);
                         overridePendingTransition(0,0);
+                        finish();
                         return true;
                     case R.id.My_Account:
                         if(!userID.equals("")){
                             Intent c  = new Intent(getApplicationContext(),userData.class);
                             startActivity(c);
                             overridePendingTransition(0,0);
+                            finish();
                         }
                         else{
                             Intent d  = new Intent(getApplicationContext(),account.class);
                             startActivity(d);
                             overridePendingTransition(0,0);
+                            finish();
                         }
 
                         return true;

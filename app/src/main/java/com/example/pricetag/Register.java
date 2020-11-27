@@ -35,7 +35,13 @@ public class Register extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseFirestore fstore;
     String userID;
-
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(Register.this, MainActivity.class));
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +124,7 @@ public class Register extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            finish();
         }
     });
 
