@@ -11,9 +11,16 @@
         android:label="PriceTag"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
-        <activity android:name=".account"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".SplashScreen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".account" />
         <activity android:name=".BottomNav" />
         <activity
             android:name=".ItemDisplay"
@@ -31,24 +38,21 @@
             android:name=".wishList"
             android:parentActivityName=".BottomNav" />
         <activity
-            android:name=".Register"  android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity" />
+            android:name=".Register"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Login" android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity" />
+            android:name=".Login"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
 
-        <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".camPage"
-            android:parentActivityName=".BottomNav"
-            >
-
+            android:parentActivityName=".BottomNav">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
