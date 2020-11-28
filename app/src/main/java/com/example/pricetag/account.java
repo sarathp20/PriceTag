@@ -23,9 +23,10 @@ public class account extends AppCompatActivity {
     public void onBackPressed()
     {
         super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
+        Intent a = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(a);
+        overridePendingTransition(0,0);
         finish();
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
