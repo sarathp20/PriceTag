@@ -27,7 +27,7 @@
                 android:layout_marginStart="140dp"
                 android:layout_marginLeft="140dp"
                 android:layout_marginBottom="49dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/darkblue"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="4.7"

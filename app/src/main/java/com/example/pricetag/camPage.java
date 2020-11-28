@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -89,6 +90,7 @@ public class camPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_activity);
+        EnableRuntimePermission();
         recyclerView=findViewById(R.id.recycler_view);
         recyclerView.setVisibility(View.VISIBLE);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
@@ -98,8 +100,12 @@ public class camPage extends AppCompatActivity {
         retake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 7);
+                EnableRuntimePermission();
+                try {
+                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, 7);
+                }
+                catch (Exception e){}
 
             }
         });
@@ -255,6 +261,10 @@ public class camPage extends AppCompatActivity {
 
 
     public void EnableRuntimePermission(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 7);
+        }
         if (ActivityCompat.shouldShowRequestPermissionRationale(camPage.this,
                 Manifest.permission.CAMERA)) {
             Toast.makeText(camPage.this,"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
@@ -262,6 +272,7 @@ public class camPage extends AppCompatActivity {
             ActivityCompat.requestPermissions(camPage.this,new String[]{
                     Manifest.permission.CAMERA}, RequestPermissionCode);
         }
+
     }
 
     @Override
@@ -269,7 +280,7 @@ public class camPage extends AppCompatActivity {
         switch (requestCode) {
             case RequestPermissionCode:
                 if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Toast.makeText(camPage.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(camPage.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(camPage.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
                 }
@@ -277,6 +288,7 @@ public class camPage extends AppCompatActivity {
         }
 
     }
+
     public void showDetail() {
         p_images = new ArrayList<>();
         p_name = new ArrayList<>();
