@@ -60,7 +60,7 @@ public class Keyword_Search extends AppCompatActivity {
     public void onBackPressed()
     {
         super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, camPage.class));
         finish();
 
     }

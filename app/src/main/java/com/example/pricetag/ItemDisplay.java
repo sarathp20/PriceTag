@@ -61,14 +61,14 @@ public class ItemDisplay extends AppCompatActivity {
 
     //ArrayList<Bitmap> imagesdisp1 = new ArrayList<>();
     ArrayList<String> imagesdisp = new ArrayList<>();
-    @Override
-    public void onBackPressed()
+  /*  @Override
+   public void onBackPressed()
     {
         super.onBackPressed();
         startActivity(new Intent(ItemDisplay.this, MainActivity.class));
         finish();
 
-    }
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
