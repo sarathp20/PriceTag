@@ -28,9 +28,6 @@
             android:name=".ItemDisplay"
             android:parentActivityName=".Keyword_Search" />
         <activity
-            android:name=".ItemBuy"
-            android:parentActivityName=".ItemDisplay" />
-        <activity
             android:name=".Keyword_Search"
             android:parentActivityName=".BottomNav" />
         <activity
