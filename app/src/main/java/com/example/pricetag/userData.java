@@ -54,22 +54,38 @@ public class userData extends AppCompatActivity {
         logoutbt=findViewById(R.id.logoubtn);
         fAuth=FirebaseAuth.getInstance();
         fStore=FirebaseFirestore.getInstance();
-        userID=fAuth.getCurrentUser().getUid();
-
-        DocumentReference documentReference=fStore.collection("users").document(userID);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                phone.setText(documentSnapshot.getString("phoneno"));
-                fullName.setText(documentSnapshot.getString("fName"));
-                email.setText(documentSnapshot.getString("email"));
-            }
-        });
+        try {
+            userID = fAuth.getCurrentUser().getUid();
+        }
+        catch (Exception e)
+        {
+            userID ="";
+        }
+       if(!userID.equals("")) {
+           DocumentReference documentReference = fStore.collection("users").document(userID);
+           documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+               @Override
+               public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                   try {
+                       phone.setText(documentSnapshot.getString("phoneno"));
+                       fullName.setText(documentSnapshot.getString("fName"));
+                       email.setText(documentSnapshot.getString("email"));
+                   }
+                   catch (Exception e){}
+               }
+           });
+       }
+       else{
+           Intent c  = new Intent(getApplicationContext(),account.class);
+           startActivity(c);
+           overridePendingTransition(0,0);
+           finish();
+       }
         logoutbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fAuth.signOut();
-                startActivity(new Intent(userData.this, MainActivity.class));
+                startActivity(new Intent(userData.this, account.class));
            //     finish();
             }
         });

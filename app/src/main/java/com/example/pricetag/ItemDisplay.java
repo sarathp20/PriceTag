@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -96,13 +99,33 @@ public class ItemDisplay extends AppCompatActivity {
                 userID="";
             }
             if(!userID.equals("")) {
-                DocumentReference collectionReference = fstore.collection(userID).document();
-                Map<String, Object> wishlist = new HashMap<>();
-                wishlist.put("wishurl", url);
-                wishlist.put("wishsite", site);
-                wishlist.put("wishid",collectionReference.getId());
-                collectionReference.set(wishlist);
-                Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+
+                CollectionReference collection = fstore.collection(userID);
+                collection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        int found=0;
+                        for(QueryDocumentSnapshot documentSnapshot:queryDocumentSnapshots){
+                            String a=documentSnapshot.getString("wishurl");
+                            if(a.equals(url)){
+                                Toast.makeText(ItemDisplay.this,"Already in wishlist",Toast.LENGTH_SHORT).show();
+                                found=1;
+                                break;
+                            }
+                        }
+                        if(found==0){
+                            DocumentReference collectionReference = fstore.collection(userID).document();
+                            Map<String, Object> wishlist = new HashMap<>();
+                            wishlist.put("wishurl", url);
+                            wishlist.put("wishsite", site);
+                            wishlist.put("wishid",collectionReference.getId());
+                            collectionReference.set(wishlist);
+                            Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+            });
+
             }
             else{
                 Toast.makeText(ItemDisplay.this, "Log in to add", Toast.LENGTH_SHORT).show();
@@ -115,9 +138,9 @@ public class ItemDisplay extends AppCompatActivity {
         buynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ItemDisplay.this, ItemBuy.class);
-                intent.putExtra("url",url);
-                startActivity(intent);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
                 finish();
             }
         });
