@@ -104,14 +104,5 @@ public class userData extends AppCompatActivity {
             }
         });
     }
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        Intent a = new Intent(getApplicationContext(),camPage.class);
-        startActivity(a);
-        overridePendingTransition(0,0);
-        finish();
-    }
 
 }

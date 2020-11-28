@@ -53,12 +53,7 @@ public class wishList extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void deletewish(String url){
-//        userID=fAuth.getCurrentUser().getUid();
-//        DocumentReference collection =fStore.collection(userID).document(id);
-//	    collection.delete();
-//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,12 +137,11 @@ public class wishList extends AppCompatActivity {
 
     }
     public void putData(){
-        Log.d("my","page");
         Productwish[] listitems=new Productwish[productList.size()];
-        for(int i=0;i<productList.size();i++){
+      /*  for(int i=0;i<productList.size();i++){
             listitems[i]=new Productwish(productList.get(i).getTitle(),productList.get(i).getRating(),productList.get(i).getPrice(),productList.get(i).getImage(),productList.get(i).getsite(),productList.get(i).getlink());
-        }
-        recyclerView.setAdapter(new MyAdapterwish(listitems));
+        }*/
+        recyclerView.setAdapter(new MyAdapterwish(productList));
     }
     private class GetData extends AsyncTask<Void,Void,Void> {
         @Override
@@ -168,6 +162,7 @@ public class wishList extends AppCompatActivity {
             for (int i = 0; i < links.size(); i++) {
                 String site = sites.get(i);
                 String url = links.get(i);
+                String id = noteid.get(i);
                 if (site.equals("Flipkart")) {
                     try {
                         document = Jsoup.connect(url).get();
@@ -201,7 +196,7 @@ public class wishList extends AppCompatActivity {
                             }
                         } catch (Exception e) {
                         }
-                        productList.add(new Productwish(name.text(),ratingtext,price.text().substring(1),image,site,url));
+                        productList.add(new Productwish(name.text(),ratingtext,price.text().substring(1),image,site,url,id));
                     } catch (Exception e) {
                     }
                 }
@@ -245,7 +240,7 @@ public class wishList extends AppCompatActivity {
 
                         } catch (Exception e) {
                         }
-                        productList.add(new Productwish(name.text(),ratingtext,price.text(),image,site,url));
+                        productList.add(new Productwish(name.text(),ratingtext,price.text(),image,site,url,id));
                     } catch (Exception e) {
                         Log.d("my", "Connection Error");
                     }
