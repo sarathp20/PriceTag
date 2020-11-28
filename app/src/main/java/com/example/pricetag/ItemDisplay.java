@@ -141,7 +141,6 @@ public class ItemDisplay extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
-                finish();
             }
         });
         ItemDisplay.GetData data = new ItemDisplay.GetData();
