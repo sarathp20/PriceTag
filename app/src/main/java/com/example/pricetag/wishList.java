@@ -44,7 +44,9 @@ public class wishList extends AppCompatActivity {
     public void onBackPressed()
     {
         super.onBackPressed();
-        startActivity(new Intent(this, camPage.class));
+        Intent a = new Intent(getApplicationContext(),camPage.class);
+        startActivity(a);
+        overridePendingTransition(0,0);
         finish();
 
     }

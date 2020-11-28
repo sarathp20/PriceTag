@@ -60,9 +60,10 @@ public class Keyword_Search extends AppCompatActivity {
     public void onBackPressed()
     {
         super.onBackPressed();
-        startActivity(new Intent(this, camPage.class));
+        Intent a = new Intent(getApplicationContext(),camPage.class);
+        startActivity(a);
+        overridePendingTransition(0,0);
         finish();
-
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

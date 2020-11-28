@@ -6,30 +6,31 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context=".Keyword_Search">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fashback" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#ffffff"
         android:id="@+id/keyitemlay"
         android:layout_height="53dp">
+
         <EditText
             android:id="@+id/keyitem"
-            android:layout_width="336dp"
+            android:layout_width="337dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="Search"
             android:imeOptions="actionDone"
-            android:background="#ffffff"
             android:inputType="textPersonName"
             android:maxLines="1" />
-
-
 
         <ImageView
             android:id="@+id/btnSpeak"
