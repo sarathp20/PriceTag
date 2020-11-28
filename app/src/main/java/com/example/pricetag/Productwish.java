@@ -10,7 +10,8 @@ public class Productwish {
     private String image;
     private String site;
     private String link;
-    public Productwish(String title/* ,String shortdesc */, String rating, String price ,String image,String site, String link) {
+    private String id;
+    public Productwish(String title/* ,String shortdesc */, String rating, String price ,String image,String site, String link,String id) {
         this.title = title;
         //    this.shortdesc = shortdesc;
         this.price = price;
@@ -19,6 +20,7 @@ public class Productwish {
         this.link = link;
         this.rating = rating;
         this.image = image;
+        this.id = id;
     }
 
     public String getTitle() { return title; }
@@ -39,5 +41,6 @@ public class Productwish {
     // public Bitmap getImage() { return image; }
     public String getsite() { return site; }
     public String getlink() { return link; }
+    public String getid() { return id; }
 }
 

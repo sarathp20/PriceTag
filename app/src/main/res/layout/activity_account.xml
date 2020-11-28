@@ -67,7 +67,7 @@
                     android:background="@drawable/rounded_button"
                     android:fontFamily="sans-serif-light"
                     android:text="Login"
-                    android:textColor="@color/darkblue"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
@@ -86,7 +86,7 @@
                     android:textAllCaps="false"
                     android:fontFamily="sans-serif-light"
                     android:textSize="18dp"
-                    android:textColor="@color/darkblue"/>
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
         </LinearLayout>
