@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -38,6 +39,7 @@ public class wishList extends AppCompatActivity {
     String userID;
     ArrayList<String> links = new ArrayList<>();
     ArrayList<String> sites = new ArrayList<>();
+    ArrayList<String> noteid = new ArrayList<>();
     RecyclerView recyclerView;
     TextView notlogin;
     @Override
@@ -50,6 +52,13 @@ public class wishList extends AppCompatActivity {
         finish();
 
     }
+
+//    @Override
+//    public void deletewish(String url){
+//        userID=fAuth.getCurrentUser().getUid();
+//        DocumentReference collection =fStore.collection(userID).document(id);
+//	    collection.delete();
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +86,10 @@ public class wishList extends AppCompatActivity {
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         String url = documentSnapshot.getString("wishurl");
                         String site = documentSnapshot.getString("wishsite");
+                        String id = documentSnapshot.getString("wishid");
                         links.add(url);
                         sites.add(site);
+                        noteid.add(id);
                     }
                     wishList.GetData data = new wishList.GetData();
                     data.execute();

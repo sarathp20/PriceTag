@@ -96,11 +96,12 @@ public class ItemDisplay extends AppCompatActivity {
                 userID="";
             }
             if(!userID.equals("")) {
-                CollectionReference collectionReference = fstore.collection(userID);
+                DocumentReference collectionReference = fstore.collection(userID).document();
                 Map<String, Object> wishlist = new HashMap<>();
                 wishlist.put("wishurl", url);
                 wishlist.put("wishsite", site);
-                collectionReference.add(wishlist);
+                wishlist.put("wishid",collectionReference.getId());
+                collectionReference.set(wishlist);
                 Toast.makeText(ItemDisplay.this, "Added to wishlist", Toast.LENGTH_SHORT).show();
             }
             else{
