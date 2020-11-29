@@ -90,7 +90,9 @@
         android:layout_marginBottom="0dp"
         android:text="Add to Wishlist"
         tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="548dp" />
+        tools:layout_editor_absoluteY="548dp"
+        android:background="@color/darkblue"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/buynow"
@@ -104,5 +106,7 @@
         android:layout_marginBottom="0dp"
         android:text="Buy now"
         tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="548dp" />
+        tools:layout_editor_absoluteY="548dp"
+        android:background="@color/orange"
+        android:textColor="@color/white"/>
 </RelativeLayout>
