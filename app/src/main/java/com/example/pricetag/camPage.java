@@ -280,7 +280,7 @@ public class camPage extends AppCompatActivity {
         switch (requestCode) {
             case RequestPermissionCode:
                 if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(camPage.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(camPage.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(camPage.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
                 }
